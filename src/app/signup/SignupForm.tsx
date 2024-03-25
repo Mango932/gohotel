@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { cn } from "../lib/utils";
+import { cn } from "../../lib/utils";
 import { useToast } from "@/components/ui/use-toast";
 
 interface FormData {

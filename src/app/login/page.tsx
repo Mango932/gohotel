@@ -1,6 +1,6 @@
 "use client";
 import Navbar from "@/components/Navbar";
-import LoginForm from "@/components/LoginForm";
+import LoginForm from "@/app/login/LoginForm";
 
 export default function signin() {
     //function that handles submitting data to the database
