@@ -72,7 +72,7 @@ export default function SignupForm({ formSubmit }: any) {
                         <Label htmlFor="firstname">First name</Label>
                         <Input
                             name="firstname"
-                            placeholder="Tyler"
+                            placeholder=""
                             type="text"
                             onChange={handleChange}
                         />
@@ -81,7 +81,7 @@ export default function SignupForm({ formSubmit }: any) {
                         <Label htmlFor="lastname">Last name</Label>
                         <Input
                             name="lastname"
-                            placeholder="Durden"
+                            placeholder=""
                             type="text"
                             onChange={handleChange}
                         />
@@ -91,7 +91,7 @@ export default function SignupForm({ formSubmit }: any) {
                     <Label htmlFor="email">Email Address</Label>
                     <Input
                         name="email"
-                        placeholder="projectmayhem@fc.com"
+                        placeholder=""
                         type="email"
                         onChange={handleChange}
                     />
@@ -100,7 +100,7 @@ export default function SignupForm({ formSubmit }: any) {
                     <Label htmlFor="password">Password</Label>
                     <Input
                         name="password"
-                        placeholder="••••••••"
+                        placeholder=""
                         type="password"
                         onChange={handleChange}
                     />
@@ -109,7 +109,7 @@ export default function SignupForm({ formSubmit }: any) {
                     <Label htmlFor="confirmPassowrd">Confirm Password</Label>
                     <Input
                         name="confirmPassword"
-                        placeholder="••••••••"
+                        placeholder=""
                         type="password"
                         onChange={handleChange}
                     />

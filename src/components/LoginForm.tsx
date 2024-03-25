@@ -69,7 +69,7 @@ export default function SignupForm({ formSubmit }: any) {
                     <Input
                         name="email"
                         placeholder="projectmayhem@fc.com"
-                        type="email"
+                        type=""
                         onChange={handleChange}
                     />
                 </LabelInputContainer>
@@ -77,7 +77,7 @@ export default function SignupForm({ formSubmit }: any) {
                     <Label htmlFor="password">Password</Label>
                     <Input
                         name="password"
-                        placeholder="••••••••"
+                        placeholder=""
                         type="password"
                         onChange={handleChange}
                     />
