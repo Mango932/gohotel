@@ -35,18 +35,19 @@ interface Account {
     accountPFPpath: string;
 }
 
-export default function ccount() {
+export default function account() {
     const [accountInfo, setAccountInfo] = useState<Account>({
         accountName: "",
         accountPFPpath: "",
     });
-
-    let data = getData();
+    const [bookings, setBooking] = useState<Booking[]>(getData())
 
     const onDelete = useCallback(
-        (booking: Booking) => alert("Delete pressed"),
+        (booking: Booking) => 
+        setBooking(bookings.filter(item => item.id !== booking.id)),
         []
     );
+
 
     return (
         <div className="h-screen ">
@@ -75,7 +76,7 @@ export default function ccount() {
                         <div className="">
                             <DataTable
                                 columns={columns({ onDelete })}
-                                data={data}
+                                data={bookings}
                             />
                         </div>
                     </div>
