@@ -51,6 +51,9 @@ export default function Navbar() {
                         <DropdownMenuItem>
                             <Link href="/login">Log in</Link>
                         </DropdownMenuItem>
+                        <DropdownMenuItem>
+                            <Link href="/account">My Account</Link>
+                        </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
