@@ -27,6 +27,15 @@ function getData(): Booking[] {
             startDate: new Date(2024, 4, 6),
             endDate: new Date(2024, 4, 9),
         },
+        {
+            id: "fwejbirf4802ub4f",
+            hotelName: "Great Hotel",
+            location: "Hawaii",
+            roomNumber: 614,
+            cost: 950,
+            startDate: new Date(2024, 4, 12),
+            endDate: new Date(2024, 4, 18),
+        },
     ];
 }
 
@@ -36,17 +45,16 @@ interface Account {
 }
 
 export default function account() {
+    const [bookings, setBooking] = useState<Booking[]>(getData())
     const [accountInfo, setAccountInfo] = useState<Account>({
         accountName: "",
         accountPFPpath: "",
     });
-    const [bookings, setBooking] = useState<Booking[]>(getData())
 
-    const onDelete = useCallback(
-        (booking: Booking) => 
-        setBooking(bookings.filter(item => item.id !== booking.id)),
-        []
-    );
+    const onDelete = (booking: Booking) => {
+        const newBooking = bookings.filter(item => item.id !== booking.id);
+        setBooking(newBooking);
+    };
 
 
     return (
