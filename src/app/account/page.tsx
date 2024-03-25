@@ -65,10 +65,10 @@ export default function account() {
                 <div className="basis-1/3 mx-5">
                     <div className="flex flex-col items-center mt-20 min-w-24">
                         <div className="bg-secondary p-36 rounded-full">
-                            <PersonIcon className="scale-[1000%]" />
+                            <PersonIcon className="scale-[800%]" />
                         </div>
                         <div className="p-4 items-center">
-                            <h2 className="w-full h-full text-center text-xl text-neutral-800 dark:text-neutral-200">
+                            <h2 className="w-full h-full text-center text-3xl text-neutral-800 dark:text-neutral-200">
                                 GoHotel Account
                             </h2>
                         </div>
@@ -77,11 +77,11 @@ export default function account() {
                 <div className="basis-2/3 mx-5">
                     <div className="flex flex-col pt-10">
                         <div className="p-4">
-                            <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
+                            <h2 className="font-bold text-2xl text-neutral-800 dark:text-neutral-200">
                                 My Bookings
                             </h2>
                         </div>
-                        <div className="">
+                        <div className="w-full max-w-[1440px]">
                             <DataTable
                                 columns={columns({ onDelete })}
                                 data={bookings}

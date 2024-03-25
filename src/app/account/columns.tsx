@@ -79,7 +79,9 @@ export const columns = ({
     {
         id: "actions",
         cell: ({ row }) => (
-            <DataTableRowActions row={row} onDelete={onDelete} />
+            <div className="flex justify-end pr-3">
+                <DataTableRowActions row={row} onDelete={onDelete} />
+            </div>
         ),
         size: 50,
     },
