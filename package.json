@@ -33,6 +33,7 @@
     "react-cool-onclickoutside": "^1.7.0",
     "react-day-picker": "^8.10.0",
     "react-dom": "^18",
+    "react-simple-star-rating": "^5.1.7",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
     "use-google-maps-script": "^0.1.2",

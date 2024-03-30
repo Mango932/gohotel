@@ -26,6 +26,7 @@ export default function Home() {
             images: "/hotelroom.jpg",
             price: 100,
             capacity: 2,
+            stars: 5,
         },
         {
             title: "Seaside",
@@ -35,6 +36,7 @@ export default function Home() {
             images: "/hotelroom.jpg",
             price: 100,
             capacity: 2,
+            stars: 5,
         },
         {
             title: "Seaside",
@@ -44,6 +46,7 @@ export default function Home() {
             images: "/hotelroom.jpg",
             price: 100,
             capacity: 2,
+            stars: 5,
         },
         {
             title: "Seaside",
@@ -53,6 +56,7 @@ export default function Home() {
             images: "/hotelroom.jpg",
             price: 100,
             capacity: 2,
+            stars: 5,
         },
     ];
 
