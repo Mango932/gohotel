@@ -1,59 +1,44 @@
 "use client";
 import Navbar from "@/components/Navbar";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { SetStateAction, useCallback, useEffect, useMemo, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { PersonIcon } from "@radix-ui/react-icons";
 import { Booking, columns } from "@/app/account/columns";
 import { DataTable } from "@/app/account/data-table";
+import { booking, room } from "@prisma/client";
+import { findBookings } from "@/DataBase/Bookings";
+import { findRoom } from "@/DataBase/Room";
 
 // Just some hard-coded data
-function getData(): Booking[] {
-    return [
-        {
-            id: "7egfb4b3r98f3fb34u",
-            hotelName: "Good Hotel",
-            location: "Hawaii",
-            roomNumber: 210,
-            cost: 410,
-            startDate: new Date(2024, 4, 7),
-            endDate: new Date(2024, 4, 12),
-        },
-        {
-            id: "vdsfjnk24480hvrbuo2",
-            hotelName: "Good Hotel",
-            location: "Hawaii",
-            roomNumber: 211,
-            cost: 320,
-            startDate: new Date(2024, 4, 6),
-            endDate: new Date(2024, 4, 9),
-        },
-        {
-            id: "fwejbirf4802ub4f",
-            hotelName: "Great Hotel",
-            location: "Hawaii",
-            roomNumber: 614,
-            cost: 950,
-            startDate: new Date(2024, 4, 12),
-            endDate: new Date(2024, 4, 18),
-        },
-    ];
-}
-
 interface Account {
     accountName: string;
     accountPFPpath: string;
 }
 
 export default function account() {
-    const [bookings, setBooking] = useState<Booking[]>(getData())
-    const [accountInfo, setAccountInfo] = useState<Account>({
-        accountName: "",
-        accountPFPpath: "",
-    });
+    const [bookings, setBookings] = useState<Booking[]>([]);
+
+    
+
+    useEffect(() => {
+        // Define your async function within the useEffect hook
+        async function fetchBookings() {
+            try {
+                const bookingDB = await findBookings(1);
+                
+            } catch (error) {
+                console.error('Error fetching bookings:', error);
+            }
+        }
+
+        // Call the function when the component mounts or when the page reloads
+        fetchBookings();
+    }, []);
+    
 
     const onDelete = (booking: Booking) => {
-        const newBooking = bookings.filter(item => item.id !== booking.id);
-        setBooking(newBooking);
+        const newBooking = bookings.filter(item => item.booking_id !== booking.booking_id);
+        setBookings(newBooking);
     };
 
 

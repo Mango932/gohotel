@@ -3,16 +3,13 @@
 import React from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import DataTableRowActions from "./DataTableRowActions";
+import { booking } from "@prisma/client"
 
-export type Booking = {
-    id: string;
-    hotelName: string;
-    location: string;
-    roomNumber: number;
+
+export type Booking = booking & {
     cost: number;
-    startDate: Date;
-    endDate: Date;
-};
+}
+
 
 interface deleteBookingProps {
     onDelete: (booking: Booking) => void;
@@ -22,22 +19,18 @@ export const columns = ({
     onDelete,
 }: deleteBookingProps): ColumnDef<Booking>[] => [
     {
-        accessorKey: "hotelName",
+        accessorKey: "hotel_name",
         header: "Hotel Name",
     },
     {
-        accessorKey: "location",
-        header: "Location",
-    },
-    {
-        accessorKey: "roomNumber",
+        accessorKey: "room_booked",
         header: "Room Number",
     },
     {
-        accessorKey: "startDate",
+        accessorKey: "check_in",
         header: "Start Date",
         cell: ({ row }) => {
-            const date: Date = row.getValue("startDate");
+            const date: Date = row.getValue("check_in");
             const options = {
                 timeZone: "America/New_York",
                 hour12: true,
@@ -49,10 +42,10 @@ export const columns = ({
         },
     },
     {
-        accessorKey: "endDate",
+        accessorKey: "check_out",
         header: "End Date",
         cell: ({ row }) => {
-            const date: Date = row.getValue("endDate");
+            const date: Date = row.getValue("check_out");
             const options = {
                 timeZone: "America/New_York",
                 hour12: true,

@@ -40,14 +40,14 @@ VALUES (1, '123 Central St', 'office@example.com', '123-456-7890'),
        (2, '456 North St', 'office@anotherchain.com', '987-654-3210');
 
 -- Example data for the Booking table
-INSERT INTO Booking (Date, Check_In, Check_Out, Customer_Booked, Room_Booked, Hotel_Name)
-VALUES ('2023-03-01', '2023-03-10', '2023-03-15', 1, 101, 'Hotel A'),
-       ('2023-03-02', '2023-03-12', '2023-03-18', 2, 202, 'Hotel B');
+INSERT INTO Booking (Date, Check_In, Check_Out, Customer_Booked, Room_Booked, Hotel_Name, status_id)
+VALUES ('2023-03-01', '2023-03-10', '2023-03-15', 1, 101, 'Hotel A', 2),
+       ('2023-03-02', '2023-03-12', '2023-03-18', 2, 202, 'Hotel B', 2);
 
 -- Example data for the Renting table
-INSERT INTO Renting (Date, Check_In, Check_Out, Customer_ID, Employee_SIN, Room_Booked, Hotel_Name)
-VALUES ('2023-04-01', '2023-04-10', '2023-04-15', 1, '123456789', 201, 'Hotel B'),
-       ('2023-04-02', '2023-04-12', '2023-04-18', 2, '987654321', 302, 'Hotel C');
+INSERT INTO Renting (Date, Check_In, Check_Out, Customer_ID, Employee_SIN, Room_Booked, Hotel_Name, status_id)
+VALUES ('2023-04-01', '2023-04-10', '2023-04-15', 1, '123456789', 201, 'Hotel B', 1),
+       ('2023-04-02', '2023-04-12', '2023-04-18', 2, '987654321', 302, 'Hotel C', 1);
 
 -- Example data for the Payment table
 INSERT INTO Payment (Renting_ID, Amount, Date, Payment_Type)

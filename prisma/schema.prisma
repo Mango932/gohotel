@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,4 +5,125 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model booking {
+  booking_id      Int           @id @default(autoincrement())
+  date            DateTime?     @db.Date
+  check_in        DateTime?     @db.Date
+  check_out       DateTime?     @db.Date
+  customer_booked Int?
+  room_booked     Int?
+  hotel_name      String?       @db.VarChar(100)
+  status_id       Int?
+  customer        customer?     @relation(fields: [customer_booked], references: [id], onDelete: Restrict)
+  room            room?         @relation(fields: [room_booked, hotel_name], references: [room_number, hotel_name], onDelete: Restrict)
+  statuslookup    statuslookup? @relation(fields: [status_id], references: [id], onDelete: Restrict)
+
+  @@index([customer_booked, hotel_name], map: "idx_booking_customer_hotel")
+}
+
+model customer {
+  id                Int       @id
+  registration_date DateTime? @db.Date
+  booking           booking[]
+  person            person    @relation(fields: [id], references: [id])
+  renting           renting[]
+
+  @@index([registration_date], map: "idx_customer_registration_date")
+}
+
+model employee {
+  sin        String    @id @db.VarChar(12)
+  role       String?   @db.VarChar(50)
+  hotel_name String    @db.VarChar(100)
+  hotel      hotel     @relation(fields: [hotel_name], references: [hotel_name])
+  renting    renting[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. 
+model hotel {
+  hotel_name      String       @id @db.VarChar(100)
+  number_of_rooms Int
+  email           String?      @db.VarChar(100)
+  address         String?      @db.VarChar(255)
+  stars           Int?
+  phone_number    String?      @db.VarChar(20)
+  hotelchain_id   Int?
+  employee        employee[]
+  hotel_chain     hotel_chain? @relation(fields: [hotelchain_id], references: [chain_id], onDelete: Restrict)
+  room            room[]
+}
+
+model hotel_chain {
+  chain_id     Int      @id @default(autoincrement())
+  name         String   @db.VarChar(100)
+  hotel_amount Int?
+  hotel        hotel[]
+  office       office[]
+}
+
+model office {
+  office_id    Int          @id @default(autoincrement())
+  chain_id     Int?
+  address      String?      @db.VarChar(255)
+  email        String?      @db.VarChar(100)
+  phone_number String?      @db.VarChar(20)
+  hotel_chain  hotel_chain? @relation(fields: [chain_id], references: [chain_id], onDelete: Restrict)
+}
+
+model payment {
+  payment_id   Int       @id @default(autoincrement())
+  renting_id   Int?
+  amount       Decimal?  @db.Decimal(10, 2)
+  date         DateTime? @db.Date
+  payment_type String?   @db.VarChar(50)
+  renting      renting?  @relation(fields: [renting_id], references: [renting_id], onDelete: Restrict)
+}
+
+model person {
+  id          Int       @id @default(autoincrement())
+  first_name  String?   @db.VarChar(50)
+  middle_name String?   @db.VarChar(50)
+  last_name   String?   @db.VarChar(50)
+  address     String?   @db.VarChar(255)
+  customer    customer?
+}
+
+model renting {
+  renting_id   Int           @id @default(autoincrement())
+  date         DateTime?     @db.Date
+  check_in     DateTime?     @db.Date
+  check_out    DateTime?     @db.Date
+  customer_id  Int?
+  employee_sin String?       @db.VarChar(12)
+  room_booked  Int?
+  hotel_name   String?       @db.VarChar(100)
+  status_id    Int?
+  payment      payment[]
+  customer     customer?     @relation(fields: [customer_id], references: [id], onDelete: Restrict)
+  employee     employee?     @relation(fields: [employee_sin], references: [sin], onDelete: Restrict)
+  room         room?         @relation(fields: [room_booked, hotel_name], references: [room_number, hotel_name], onDelete: Restrict)
+  statuslookup statuslookup? @relation(fields: [status_id], references: [id], onDelete: Restrict)
+}
+
+model room {
+  room_number Int
+  hotel_name  String    @db.VarChar(100)
+  price       Decimal?  @db.Decimal(10, 2)
+  capacity    Int?
+  view_type   String?   @db.VarChar(50)
+  booking     booking[]
+  renting     renting[]
+  hotel       hotel     @relation(fields: [hotel_name], references: [hotel_name])
+
+  @@id([room_number, hotel_name])
+  @@index([hotel_name], map: "idx_room_hotel_name")
+}
+
+model statuslookup {
+  id      Int       @id @default(autoincrement())
+  status  String?   @unique @db.VarChar(255)
+  booking booking[]
+  renting renting[]
 }
