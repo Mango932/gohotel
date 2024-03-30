@@ -11,17 +11,50 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
-import usePlacesAutocomplete from "use-places-autocomplete";
-import useOnclickOutside from "react-cool-onclickoutside";
-import { useLoadScript } from "@react-google-maps/api";
+import SeachBox from "@/components/SeachBox";
+import SearchResults from "@/components/SearchResults";
 
 export default function Home() {
-    const { isLoaded } = useLoadScript({
-        // @ts-ignore
-        googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-        libraries: ["places"],
-    });
     const [traveler, setTraveler] = useState(1);
+
+    const data = [
+        {
+            title: "Seaside",
+            description:
+                "Beautiful seaside resort with tons of great amenities and services. Equipped with a full bath and kitchen.",
+            address: "500 king street",
+            images: "/hotelroom.jpg",
+            price: 100,
+            capacity: 2,
+        },
+        {
+            title: "Seaside",
+            description:
+                "Beautiful seaside resort with tons of great amenities and services. Equipped with a full bath and kitchen.",
+            address: "500 king street",
+            images: "/hotelroom.jpg",
+            price: 100,
+            capacity: 2,
+        },
+        {
+            title: "Seaside",
+            description:
+                "Beautiful seaside resort with tons of great amenities and services. Equipped with a full bath and kitchen.",
+            address: "500 king street",
+            images: "/hotelroom.jpg",
+            price: 100,
+            capacity: 2,
+        },
+        {
+            title: "Seaside",
+            description:
+                "Beautiful seaside resort with tons of great amenities and services. Equipped with a full bath and kitchen.",
+            address: "500 king street",
+            images: "/hotelroom.jpg",
+            price: 100,
+            capacity: 2,
+        },
+    ];
 
     return (
         <div className="h-screen">
@@ -29,7 +62,7 @@ export default function Home() {
             <div className="flex w-full justify-center items-end gap-5 mt-10">
                 <div>
                     <Label htmlFor="location">Location</Label>
-                    <PlacesAutocomplete />
+                    <SeachBox />
                 </div>
                 <div>
                     <Label htmlFor="date">Date</Label>
@@ -81,43 +114,9 @@ export default function Home() {
                     </span>
                 </button>
             </div>
+            <div>
+                <SearchResults data={data} />
+            </div>
         </div>
     );
 }
-
-// @ts-ignore
-const PlacesAutocomplete = () => {
-    const {
-        ready,
-        value,
-        suggestions: { status, data },
-        setValue,
-        clearSuggestions,
-    } = usePlacesAutocomplete();
-
-    const ref = useOnclickOutside(() => {
-        clearSuggestions();
-    });
-
-    return (
-        <div ref={ref}>
-            <Input
-                className="mt-2"
-                name="location"
-                type="location"
-                placeholder="Ex: Japan"
-                value={value}
-                onChange={(e) => {
-                    setValue(e.target.value);
-                    console.log(data);
-                }}
-                disabled={!ready}
-            ></Input>
-            {/* We can use the "status" to decide whether we should display the dropdown or not */}
-            {status === "OK" &&
-                data.map(({ place_id, description }) => (
-                    <ul key={place_id}>{description}</ul>
-                ))}
-        </div>
-    );
-};

@@ -25,7 +25,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "date-fns": "^3.6.0",
-    "framer-motion": "^11.0.18",
+    "framer-motion": "^11.0.24",
     "lucide-react": "^0.359.0",
     "next": "14.1.4",
     "next-themes": "^0.3.0",
@@ -35,6 +35,7 @@
     "react-dom": "^18",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
+    "use-google-maps-script": "^0.1.2",
     "use-places-autocomplete": "^4.0.1"
   },
   "devDependencies": {

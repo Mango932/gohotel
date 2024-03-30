@@ -28,7 +28,7 @@ export default function RootLayout({ children }: any) {
                 >
                     {children}
                 </ThemeProvider>
-                <Toaster />
+                <Toaster />s
             </body>
         </html>
     );

@@ -22,6 +22,7 @@ export default function Navbar() {
                     width={250}
                     height={100}
                     alt="GoHotel Logo"
+                    priority
                 />
             </Link>
 
