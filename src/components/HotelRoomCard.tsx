@@ -41,7 +41,7 @@ export default function HotelRoomCard({ info }: any) {
 
                         <CardItem translateZ="40" className="w-full mt-6">
                             <Image
-                                src={info.image}
+                                src={info.image || "/hotelroom.jpg"}
                                 height="1000"
                                 width="1000"
                                 className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"

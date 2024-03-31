@@ -12,14 +12,16 @@ import SeachBox from "@/components/SeachBox";
 import { useState } from "react";
 import { addDays, format } from "date-fns";
 import { DateRange } from "react-day-picker";
+import { useRouter } from "next/navigation";
 
-export default function SearchBar({ handleSearch }: any) {
+export default function SearchBar() {
     const [traveler, setTraveler] = useState(1);
-    const [location, setLocation] = useState<String>("");
+    const [location, setLocation] = useState<string>("");
     const [date, setDate] = useState<DateRange | undefined>({
         from: addDays(new Date(), 3),
         to: addDays(new Date(), 6),
     });
+    const router = useRouter();
 
     const onLocationChange = (location: string) => {
         setLocation(location);
@@ -29,9 +31,46 @@ export default function SearchBar({ handleSearch }: any) {
         setDate(dates);
     };
 
+    const onSearch = () => {
+        const startDate =
+            date?.from?.getFullYear() +
+            "-" +
+            ((date?.from?.getMonth() || 0 + 1) < 10
+                ? "0" + (date?.from?.getMonth() || "" + 1)
+                : date?.from?.getMonth() || "" + 1) +
+            "-" +
+            (date?.from?.getDate() || 0 < 10
+                ? "0" + (date?.from?.getDate() || "")
+                : date?.from?.getDate()) +
+            "T00.00.00.000Z";
+
+        const endDate =
+            date?.to?.getFullYear() +
+            "-" +
+            ((date?.to?.getMonth() || 0 + 1) < 10
+                ? "0" + (date?.to?.getMonth() || "" + 1)
+                : date?.to?.getMonth() || "" + 1) +
+            "-" +
+            (date?.to?.getDate() || 0 < 10
+                ? "0" + (date?.to?.getDate() || "")
+                : date?.to?.getDate()) +
+            "T00.00.00.000Z";
+
+        const searchQuery = `location=${encodeURIComponent(
+            location
+        )}&traveler=${encodeURIComponent(
+            traveler
+        )}&startDate=${encodeURIComponent(
+            startDate
+        )}&endDate=${encodeURIComponent(endDate)}`;
+
+        const encodedSearchQuery = encodeURI(searchQuery);
+        router.push(`/search?${encodedSearchQuery}`);
+    };
+
     return (
         <>
-            <div className="flex w-full justify-center items-end gap-5 mt-10">
+            <div className="flex w-full justify-center items-end gap-5 mt-10 flex-wrap">
                 <div>
                     <Label htmlFor="location">Location</Label>
                     <SeachBox onLocationChange={onLocationChange} />
@@ -86,7 +125,7 @@ export default function SearchBar({ handleSearch }: any) {
                 <button className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-[#e11d48] to-[#e11daa] group-hover:from-[#e11d48] group-hover:to-[#e11daa] hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
                     <span
                         className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 w-full"
-                        onClick={() => handleSearch(location, date, traveler)}
+                        onClick={() => onSearch()}
                     >
                         Search
                     </span>
