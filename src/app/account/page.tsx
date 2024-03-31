@@ -1,13 +1,17 @@
 "use client";
 import Navbar from "@/components/Navbar";
-import { SetStateAction, useCallback, useEffect, useMemo, useState } from "react";
+import {
+    SetStateAction,
+    useCallback,
+    useEffect,
+    useMemo,
+    useState,
+} from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { PersonIcon } from "@radix-ui/react-icons";
 import { Booking, columns } from "@/app/account/columns";
 import { DataTable } from "@/app/account/data-table";
-import { booking, room } from "@prisma/client";
-import { findBookings } from "@/DataBase/Bookings";
-import { findRoom } from "@/DataBase/Room";
+import { findBookings } from "@/app/api/Bookings";
 
 // Just some hard-coded data
 interface Account {
@@ -18,29 +22,26 @@ interface Account {
 export default function account() {
     const [bookings, setBookings] = useState<Booking[]>([]);
 
-    
-
     useEffect(() => {
         // Define your async function within the useEffect hook
         async function fetchBookings() {
             try {
                 const bookingDB = await findBookings(1);
-                
             } catch (error) {
-                console.error('Error fetching bookings:', error);
+                console.error("Error fetching bookings:", error);
             }
         }
 
         // Call the function when the component mounts or when the page reloads
         fetchBookings();
     }, []);
-    
 
     const onDelete = (booking: Booking) => {
-        const newBooking = bookings.filter(item => item.booking_id !== booking.booking_id);
+        const newBooking = bookings.filter(
+            (item) => item.booking_id !== booking.booking_id
+        );
         setBookings(newBooking);
     };
-
 
     return (
         <div className="h-screen ">

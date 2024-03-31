@@ -15,10 +15,10 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Rating } from "react-simple-star-rating";
 import StarRating from "./StarRating";
 
 export default function HotelRoomCard({ info }: any) {
+    console.log(info);
     return (
         <AlertDialog>
             <AlertDialogTrigger>
@@ -29,7 +29,7 @@ export default function HotelRoomCard({ info }: any) {
                                 translateZ="20"
                                 className="text-3xl font-bold "
                             >
-                                {info.title}
+                                {info.hotel_name}
                             </CardItem>
                             <CardItem
                                 translateZ={20}
@@ -41,11 +41,11 @@ export default function HotelRoomCard({ info }: any) {
 
                         <CardItem translateZ="40" className="w-full mt-6">
                             <Image
-                                src="/hotelroom.jpg"
+                                src={info.image}
                                 height="1000"
                                 width="1000"
                                 className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
-                                alt="thumbnail"
+                                alt="Hotel room image"
                             />
                         </CardItem>
                         <CardItem
@@ -58,9 +58,6 @@ export default function HotelRoomCard({ info }: any) {
                         <div className="flex justify-between items-center mt-8">
                             <CardItem
                                 translateZ={20}
-                                as={Link}
-                                href="https://twitter.com/mannupaaji"
-                                target="__blank"
                                 className="px-4 rounded-xl text-lg font-bold dark:text-white"
                             >
                                 CA ${info.price}

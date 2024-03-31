@@ -7,7 +7,7 @@ import { Input } from "./ui/input";
 
 const libraries: Libraries = ["places"];
 
-export default function SeachBox() {
+export default function SeachBox({ onLocationChange }: any) {
     const googleMapsApiKey: string = process.env.NEXT_PUBLIC_MAPS_API_KEY || "";
 
     const { isLoaded, loadError } = useGoogleMapsScript({
@@ -20,12 +20,12 @@ export default function SeachBox() {
         return;
     }
     if (isLoaded) {
-        return <AutoComplete />;
+        return <AutoComplete onLocationChange={onLocationChange} />;
     }
     return <></>;
 }
 
-export function AutoComplete() {
+export function AutoComplete({ onLocationChange }: any) {
     const {
         ready,
         value,
@@ -37,6 +37,7 @@ export function AutoComplete() {
     const ref = useOnclickOutside(() => {
         clearSuggestions();
     });
+
     return (
         <div ref={ref}>
             <Input
@@ -46,9 +47,8 @@ export function AutoComplete() {
                 placeholder="Ex: Japan"
                 value={value}
                 onChange={(e) => {
+                    onLocationChange(e.target.value);
                     setValue(e.target.value);
-                    console.log(data);
-                    console.log(e.target.value);
                 }}
                 disabled={!ready}
             ></Input>
