@@ -11,6 +11,7 @@ interface FormData {
     email: string;
     password: string;
     confirmPassword: string;
+    address: string;
 }
 
 export default function SignupForm({ formSubmit }: any) {
@@ -20,6 +21,7 @@ export default function SignupForm({ formSubmit }: any) {
         email: "",
         password: "",
         confirmPassword: "",
+        address: "",
     });
     const { toast } = useToast();
 
@@ -93,6 +95,15 @@ export default function SignupForm({ formSubmit }: any) {
                         name="email"
                         placeholder=""
                         type="email"
+                        onChange={handleChange}
+                    />
+                </LabelInputContainer>
+                <LabelInputContainer className="mb-4">
+                    <Label htmlFor="address">Address</Label>
+                    <Input
+                        name="address"
+                        placeholder=""
+                        type="address"
                         onChange={handleChange}
                     />
                 </LabelInputContainer>
