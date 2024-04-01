@@ -9,9 +9,9 @@ datasource db {
 
 model booking {
   booking_id      Int           @id @default(autoincrement())
-  date            DateTime?     @db.Date
-  check_in        DateTime?     @db.Date
-  check_out       DateTime?     @db.Date
+  date            DateTime    @db.Date
+  check_in        DateTime    @db.Date
+  check_out       DateTime     @db.Date
   customer_booked Int?
   room_booked     Int?
   hotel_name      String?       @db.VarChar(100)
@@ -33,15 +33,17 @@ model customer {
   @@index([registration_date], map: "idx_customer_registration_date")
 }
 
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model employee {
-  sin        String    @id @db.VarChar(12)
+  sin        Int       @id
   role       String?   @db.VarChar(50)
   hotel_name String    @db.VarChar(100)
   hotel      hotel     @relation(fields: [hotel_name], references: [hotel_name])
+  person     person    @relation(fields: [sin], references: [id])
   renting    renting[]
 }
 
-/// This table contains check constraints and requires additional setup for migrations. 
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model hotel {
   hotel_name      String       @id @db.VarChar(100)
   number_of_rooms Int
@@ -82,21 +84,22 @@ model payment {
 }
 
 model person {
-  id          Int       @id @default(autoincrement())
+  id          Int       @id
   first_name  String?   @db.VarChar(50)
   middle_name String?   @db.VarChar(50)
   last_name   String?   @db.VarChar(50)
   address     String?   @db.VarChar(255)
   customer    customer?
+  employee    employee?
 }
 
 model renting {
   renting_id   Int           @id @default(autoincrement())
-  date         DateTime?     @db.Date
-  check_in     DateTime?     @db.Date
-  check_out    DateTime?     @db.Date
+  date         DateTime    @db.Date
+  check_in     DateTime     @db.Date
+  check_out    DateTime     @db.Date
   customer_id  Int?
-  employee_sin String?       @db.VarChar(12)
+  employee_sin Int?
   room_booked  Int?
   hotel_name   String?       @db.VarChar(100)
   status_id    Int?

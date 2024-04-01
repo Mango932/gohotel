@@ -1,9 +1,9 @@
 -- CreateTable
 CREATE TABLE "booking" (
     "booking_id" SERIAL NOT NULL,
-    "date" DATE,
-    "check_in" DATE,
-    "check_out" DATE,
+    "date" DATE NOT NULL,
+    "check_in" DATE NOT NULL,
+    "check_out" DATE NOT NULL,
     "customer_booked" INTEGER,
     "room_booked" INTEGER,
     "hotel_name" VARCHAR(100),
@@ -22,7 +22,7 @@ CREATE TABLE "customer" (
 
 -- CreateTable
 CREATE TABLE "employee" (
-    "sin" VARCHAR(12) NOT NULL,
+    "sin" INTEGER NOT NULL,
     "role" VARCHAR(50),
     "hotel_name" VARCHAR(100) NOT NULL,
 
@@ -75,7 +75,7 @@ CREATE TABLE "payment" (
 
 -- CreateTable
 CREATE TABLE "person" (
-    "id" SERIAL NOT NULL,
+    "id" INTEGER NOT NULL,
     "first_name" VARCHAR(50),
     "middle_name" VARCHAR(50),
     "last_name" VARCHAR(50),
@@ -87,11 +87,11 @@ CREATE TABLE "person" (
 -- CreateTable
 CREATE TABLE "renting" (
     "renting_id" SERIAL NOT NULL,
-    "date" DATE,
-    "check_in" DATE,
-    "check_out" DATE,
+    "date" DATE NOT NULL,
+    "check_in" DATE NOT NULL,
+    "check_out" DATE NOT NULL,
     "customer_id" INTEGER,
-    "employee_sin" VARCHAR(12),
+    "employee_sin" INTEGER,
     "room_booked" INTEGER,
     "hotel_name" VARCHAR(100),
     "status_id" INTEGER,
@@ -144,6 +144,9 @@ ALTER TABLE "customer" ADD CONSTRAINT "customer_id_fkey" FOREIGN KEY ("id") REFE
 
 -- AddForeignKey
 ALTER TABLE "employee" ADD CONSTRAINT "employee_hotel_name_fkey" FOREIGN KEY ("hotel_name") REFERENCES "hotel"("hotel_name") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "employee" ADD CONSTRAINT "employee_sin_fkey" FOREIGN KEY ("sin") REFERENCES "person"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "hotel" ADD CONSTRAINT "hotel_hotelchain_id_fkey" FOREIGN KEY ("hotelchain_id") REFERENCES "hotel_chain"("chain_id") ON DELETE RESTRICT ON UPDATE CASCADE;
