@@ -1,6 +1,6 @@
 -- Create the Person table
 CREATE TABLE Person (
-    ID SERIAL PRIMARY KEY,
+    ID INT PRIMARY KEY,
     First_Name VARCHAR(50),
     Middle_Name VARCHAR(50),
     Last_Name VARCHAR(50),
@@ -58,12 +58,17 @@ CREATE TABLE Room (
 
 -- Create the Employee table
 CREATE TABLE Employee (
-    SIN VARCHAR(12) PRIMARY KEY,
+    SIN INT PRIMARY KEY CHECK (SIN >= 100000000 AND SIN <= 999999999),
     Role VARCHAR(50),
     Hotel_Name VARCHAR(100) NOT NULL,
     CONSTRAINT employee_hotel_name_fkey
         FOREIGN KEY (Hotel_Name) 
         REFERENCES Hotel(Hotel_Name)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+    CONSTRAINT employee_sin_fkey
+        FOREIGN KEY (SIN)
+        REFERENCES Person(ID)
         ON DELETE RESTRICT
         ON UPDATE CASCADE
 );
@@ -127,7 +132,7 @@ CREATE TABLE Renting (
     Check_In DATE,
     Check_Out DATE,
     Customer_ID INT,
-    Employee_SIN VARCHAR(12),
+    Employee_SIN INT,
     Room_Booked INT,
     Hotel_Name VARCHAR(100),
     status_id INT,

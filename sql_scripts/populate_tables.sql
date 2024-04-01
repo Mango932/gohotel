@@ -1,7 +1,10 @@
 -- Example data for the Person table
-INSERT INTO Person (First_Name, Middle_Name, Last_Name, Address)
-VALUES ('John', 'Doe', NULL, '123 Main St'),
-       ('Jane', 'Doe', 'Alice', '456 Elm St');
+INSERT INTO Person (ID, First_Name, Middle_Name, Last_Name, Address)
+VALUES (1, 'John', 'Doe', NULL, '123 Main St'),
+       (2, 'Jane', 'Doe', 'Alice', '456 Elm St'),
+       (123456789, 'Jane', 'Doe', 'Alice', '789 Elm St'),
+       (987654321, 'Jane', 'Doe', 'Alice', '753 Elm St'),
+       (456789012, 'Jane', 'Doe', 'Alice', '159 Elm St');
 
 -- Example data for the Customer table
 INSERT INTO Customer (ID, Registration_Date)
@@ -30,9 +33,9 @@ VALUES (101, 'Hotel A', 100, 2, 'City View'),
 
 -- Example data for the Employee table
 INSERT INTO Employee (SIN, Role, Hotel_Name)
-VALUES ('123456789', 'Manager', 'Hotel A'),
-       ('987654321', 'Receptionist', 'Hotel B'),
-       ('456789012', 'Housekeeping', 'Hotel C');
+VALUES (123456789, 'Manager', 'Hotel A'),
+       (987654321, 'Receptionist', 'Hotel B'),
+       (456789012, 'Housekeeping', 'Hotel C');
 
 -- Example data for the Office table
 INSERT INTO Office (Chain_ID, Address, Email, Phone_Number)
