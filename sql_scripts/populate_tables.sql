@@ -7,9 +7,9 @@ VALUES (1, 'John', 'Doe', NULL, '123 Main St'),
        (456789012, 'Jane', 'Doe', 'Alice', '159 Elm St');
 
 -- Example data for the Customer table
-INSERT INTO Customer (ID, Registration_Date)
-VALUES (1, '2023-01-15'),
-       (2, '2023-02-20');
+INSERT INTO Customer (ID, Password, Registration_Date)
+VALUES (1, 'password1', '2023-01-15'),
+       (2, 'password2', '2023-02-20');
 
 -- Example data for the Hotel_Chain table
 INSERT INTO Hotel_Chain (Name, Hotel_Amount)
@@ -32,10 +32,10 @@ VALUES (101, 'Hotel A', 100, 2, 'City View'),
        (302, 'Hotel C', 200, 4, 'Ocean View');
 
 -- Example data for the Employee table
-INSERT INTO Employee (SIN, Role, Hotel_Name)
-VALUES (123456789, 'Manager', 'Hotel A'),
-       (987654321, 'Receptionist', 'Hotel B'),
-       (456789012, 'Housekeeping', 'Hotel C');
+INSERT INTO Employee (SIN, Password, Role, Hotel_Name)
+VALUES (123456789, 'Epassword1', 'Manager', 'Hotel A'),
+       (987654321, 'Epassword2', 'Receptionist', 'Hotel B'),
+       (456789012, 'Epassword3', 'Housekeeping', 'Hotel C');
 
 -- Example data for the Office table
 INSERT INTO Office (Chain_ID, Address, Email, Phone_Number)

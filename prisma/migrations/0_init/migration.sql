@@ -1,13 +1,13 @@
 -- CreateTable
 CREATE TABLE "booking" (
     "booking_id" SERIAL NOT NULL,
-    "date" DATE NOT NULL,
+    "date" DATE,
     "check_in" DATE NOT NULL,
     "check_out" DATE NOT NULL,
-    "customer_booked" INTEGER,
-    "room_booked" INTEGER,
-    "hotel_name" VARCHAR(100),
-    "status_id" INTEGER,
+    "customer_booked" INTEGER NOT NULL,
+    "room_booked" INTEGER NOT NULL,
+    "hotel_name" VARCHAR(100) NOT NULL,
+    "status_id" INTEGER NOT NULL,
 
     CONSTRAINT "booking_pkey" PRIMARY KEY ("booking_id")
 );
@@ -15,7 +15,8 @@ CREATE TABLE "booking" (
 -- CreateTable
 CREATE TABLE "customer" (
     "id" INTEGER NOT NULL,
-    "registration_date" DATE,
+    "password" VARCHAR(64) NOT NULL,
+    "registration_date" DATE NOT NULL,
 
     CONSTRAINT "customer_pkey" PRIMARY KEY ("id")
 );
@@ -23,7 +24,8 @@ CREATE TABLE "customer" (
 -- CreateTable
 CREATE TABLE "employee" (
     "sin" INTEGER NOT NULL,
-    "role" VARCHAR(50),
+    "password" VARCHAR(64) NOT NULL,
+    "role" VARCHAR(50) NOT NULL,
     "hotel_name" VARCHAR(100) NOT NULL,
 
     CONSTRAINT "employee_pkey" PRIMARY KEY ("sin")
@@ -34,10 +36,10 @@ CREATE TABLE "hotel" (
     "hotel_name" VARCHAR(100) NOT NULL,
     "number_of_rooms" INTEGER NOT NULL,
     "email" VARCHAR(100),
-    "address" VARCHAR(255),
+    "address" VARCHAR(255) NOT NULL,
     "stars" INTEGER,
     "phone_number" VARCHAR(20),
-    "hotelchain_id" INTEGER,
+    "hotelchain_id" INTEGER NOT NULL,
 
     CONSTRAINT "hotel_pkey" PRIMARY KEY ("hotel_name")
 );
@@ -54,8 +56,8 @@ CREATE TABLE "hotel_chain" (
 -- CreateTable
 CREATE TABLE "office" (
     "office_id" SERIAL NOT NULL,
-    "chain_id" INTEGER,
-    "address" VARCHAR(255),
+    "chain_id" INTEGER NOT NULL,
+    "address" VARCHAR(255) NOT NULL,
     "email" VARCHAR(100),
     "phone_number" VARCHAR(20),
 
@@ -65,10 +67,10 @@ CREATE TABLE "office" (
 -- CreateTable
 CREATE TABLE "payment" (
     "payment_id" SERIAL NOT NULL,
-    "renting_id" INTEGER,
-    "amount" DECIMAL(10,2),
-    "date" DATE,
-    "payment_type" VARCHAR(50),
+    "renting_id" INTEGER NOT NULL,
+    "amount" DECIMAL(10,2) NOT NULL,
+    "date" DATE NOT NULL,
+    "payment_type" VARCHAR(50) NOT NULL,
 
     CONSTRAINT "payment_pkey" PRIMARY KEY ("payment_id")
 );
@@ -87,14 +89,14 @@ CREATE TABLE "person" (
 -- CreateTable
 CREATE TABLE "renting" (
     "renting_id" SERIAL NOT NULL,
-    "date" DATE NOT NULL,
+    "date" DATE,
     "check_in" DATE NOT NULL,
     "check_out" DATE NOT NULL,
-    "customer_id" INTEGER,
-    "employee_sin" INTEGER,
-    "room_booked" INTEGER,
-    "hotel_name" VARCHAR(100),
-    "status_id" INTEGER,
+    "customer_id" INTEGER NOT NULL,
+    "employee_sin" INTEGER NOT NULL,
+    "room_booked" INTEGER NOT NULL,
+    "hotel_name" VARCHAR(100) NOT NULL,
+    "status_id" INTEGER NOT NULL,
 
     CONSTRAINT "renting_pkey" PRIMARY KEY ("renting_id")
 );
@@ -103,8 +105,8 @@ CREATE TABLE "renting" (
 CREATE TABLE "room" (
     "room_number" INTEGER NOT NULL,
     "hotel_name" VARCHAR(100) NOT NULL,
-    "price" DECIMAL(10,2),
-    "capacity" INTEGER,
+    "price" DECIMAL(10,2) NOT NULL,
+    "capacity" INTEGER NOT NULL,
     "view_type" VARCHAR(50),
 
     CONSTRAINT "room_pkey" PRIMARY KEY ("room_number","hotel_name")

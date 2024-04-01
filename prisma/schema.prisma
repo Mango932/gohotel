@@ -8,24 +8,25 @@ datasource db {
 }
 
 model booking {
-  booking_id      Int           @id @default(autoincrement())
-  date            DateTime    @db.Date
-  check_in        DateTime    @db.Date
+  booking_id      Int          @id @default(autoincrement())
+  date            DateTime?    @db.Date
+  check_in        DateTime     @db.Date
   check_out       DateTime     @db.Date
-  customer_booked Int?
-  room_booked     Int?
-  hotel_name      String?       @db.VarChar(100)
-  status_id       Int?
-  customer        customer?     @relation(fields: [customer_booked], references: [id], onDelete: Restrict)
-  room            room?         @relation(fields: [room_booked, hotel_name], references: [room_number, hotel_name], onDelete: Restrict)
-  statuslookup    statuslookup? @relation(fields: [status_id], references: [id], onDelete: Restrict)
+  customer_booked Int
+  room_booked     Int
+  hotel_name      String       @db.VarChar(100)
+  status_id       Int
+  customer        customer     @relation(fields: [customer_booked], references: [id])
+  room            room         @relation(fields: [room_booked, hotel_name], references: [room_number, hotel_name])
+  statuslookup    statuslookup @relation(fields: [status_id], references: [id])
 
   @@index([customer_booked, hotel_name], map: "idx_booking_customer_hotel")
 }
 
 model customer {
   id                Int       @id
-  registration_date DateTime? @db.Date
+  password          String    @db.VarChar(64)
+  registration_date DateTime  @db.Date
   booking           booking[]
   person            person    @relation(fields: [id], references: [id])
   renting           renting[]
@@ -36,7 +37,8 @@ model customer {
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model employee {
   sin        Int       @id
-  role       String?   @db.VarChar(50)
+  password   String    @db.VarChar(64)
+  role       String    @db.VarChar(50)
   hotel_name String    @db.VarChar(100)
   hotel      hotel     @relation(fields: [hotel_name], references: [hotel_name])
   person     person    @relation(fields: [sin], references: [id])
@@ -45,15 +47,15 @@ model employee {
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model hotel {
-  hotel_name      String       @id @db.VarChar(100)
+  hotel_name      String      @id @db.VarChar(100)
   number_of_rooms Int
-  email           String?      @db.VarChar(100)
-  address         String?      @db.VarChar(255)
+  email           String?     @db.VarChar(100)
+  address         String      @db.VarChar(255)
   stars           Int?
-  phone_number    String?      @db.VarChar(20)
-  hotelchain_id   Int?
+  phone_number    String?     @db.VarChar(20)
+  hotelchain_id   Int
   employee        employee[]
-  hotel_chain     hotel_chain? @relation(fields: [hotelchain_id], references: [chain_id], onDelete: Restrict)
+  hotel_chain     hotel_chain @relation(fields: [hotelchain_id], references: [chain_id])
   room            room[]
 }
 
@@ -66,21 +68,21 @@ model hotel_chain {
 }
 
 model office {
-  office_id    Int          @id @default(autoincrement())
-  chain_id     Int?
-  address      String?      @db.VarChar(255)
-  email        String?      @db.VarChar(100)
-  phone_number String?      @db.VarChar(20)
-  hotel_chain  hotel_chain? @relation(fields: [chain_id], references: [chain_id], onDelete: Restrict)
+  office_id    Int         @id @default(autoincrement())
+  chain_id     Int
+  address      String      @db.VarChar(255)
+  email        String?     @db.VarChar(100)
+  phone_number String?     @db.VarChar(20)
+  hotel_chain  hotel_chain @relation(fields: [chain_id], references: [chain_id])
 }
 
 model payment {
-  payment_id   Int       @id @default(autoincrement())
-  renting_id   Int?
-  amount       Decimal?  @db.Decimal(10, 2)
-  date         DateTime? @db.Date
-  payment_type String?   @db.VarChar(50)
-  renting      renting?  @relation(fields: [renting_id], references: [renting_id], onDelete: Restrict)
+  payment_id   Int      @id @default(autoincrement())
+  renting_id   Int
+  amount       Decimal  @db.Decimal(10, 2)
+  date         DateTime @db.Date
+  payment_type String   @db.VarChar(50)
+  renting      renting  @relation(fields: [renting_id], references: [renting_id])
 }
 
 model person {
@@ -94,27 +96,27 @@ model person {
 }
 
 model renting {
-  renting_id   Int           @id @default(autoincrement())
-  date         DateTime    @db.Date
+  renting_id   Int          @id @default(autoincrement())
+  date         DateTime?    @db.Date
   check_in     DateTime     @db.Date
   check_out    DateTime     @db.Date
-  customer_id  Int?
-  employee_sin Int?
-  room_booked  Int?
-  hotel_name   String?       @db.VarChar(100)
-  status_id    Int?
+  customer_id  Int
+  employee_sin Int
+  room_booked  Int
+  hotel_name   String       @db.VarChar(100)
+  status_id    Int
   payment      payment[]
-  customer     customer?     @relation(fields: [customer_id], references: [id], onDelete: Restrict)
-  employee     employee?     @relation(fields: [employee_sin], references: [sin], onDelete: Restrict)
-  room         room?         @relation(fields: [room_booked, hotel_name], references: [room_number, hotel_name], onDelete: Restrict)
-  statuslookup statuslookup? @relation(fields: [status_id], references: [id], onDelete: Restrict)
+  customer     customer     @relation(fields: [customer_id], references: [id])
+  employee     employee     @relation(fields: [employee_sin], references: [sin])
+  room         room         @relation(fields: [room_booked, hotel_name], references: [room_number, hotel_name])
+  statuslookup statuslookup @relation(fields: [status_id], references: [id])
 }
 
 model room {
   room_number Int
   hotel_name  String    @db.VarChar(100)
-  price       Decimal?  @db.Decimal(10, 2)
-  capacity    Int?
+  price       Decimal   @db.Decimal(10, 2)
+  capacity    Int
   view_type   String?   @db.VarChar(50)
   booking     booking[]
   renting     renting[]
