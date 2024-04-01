@@ -25,6 +25,7 @@ model booking {
 
 model customer {
   id                Int       @id
+  email             String    @db.VarChar(100)
   password          String    @db.VarChar(64)
   registration_date DateTime  @db.Date
   booking           booking[]
@@ -37,6 +38,7 @@ model customer {
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model employee {
   sin        Int       @id
+  email      String    @db.VarChar(100)
   password   String    @db.VarChar(64)
   role       String    @db.VarChar(50)
   hotel_name String    @db.VarChar(100)

@@ -10,6 +10,7 @@ CREATE TABLE Person (
 -- Create the Customer table inheriting from Person
 CREATE TABLE Customer (
     ID INT PRIMARY KEY,
+    Email VARCHAR(100) NOT NULL,
     Password VARCHAR(64) NOT NULL,
     Registration_Date DATE NOT NULL,
     CONSTRAINT customer_id_fkey
@@ -60,6 +61,7 @@ CREATE TABLE Room (
 -- Create the Employee table
 CREATE TABLE Employee (
     SIN INT PRIMARY KEY CHECK (SIN >= 100000000 AND SIN <= 999999999),
+    Email VARCHAR(100) NOT NULL,
     Password VARCHAR(64) NOT NULL,
     Role VARCHAR(50) NOT NULL,
     Hotel_Name VARCHAR(100) NOT NULL,

@@ -15,6 +15,7 @@ CREATE TABLE "booking" (
 -- CreateTable
 CREATE TABLE "customer" (
     "id" INTEGER NOT NULL,
+    "email" VARCHAR(100) NOT NULL,
     "password" VARCHAR(64) NOT NULL,
     "registration_date" DATE NOT NULL,
 
@@ -24,6 +25,7 @@ CREATE TABLE "customer" (
 -- CreateTable
 CREATE TABLE "employee" (
     "sin" INTEGER NOT NULL,
+    "email" VARCHAR(100) NOT NULL,
     "password" VARCHAR(64) NOT NULL,
     "role" VARCHAR(50) NOT NULL,
     "hotel_name" VARCHAR(100) NOT NULL,
