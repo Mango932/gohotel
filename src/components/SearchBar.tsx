@@ -65,7 +65,7 @@ export default function SearchBar() {
         )}&endDate=${encodeURIComponent(endDate)}`;
 
         const encodedSearchQuery = encodeURI(searchQuery);
-        router.push(`/search?${encodedSearchQuery}`);
+        router.push(`?${encodedSearchQuery}`);
     };
 
     return (

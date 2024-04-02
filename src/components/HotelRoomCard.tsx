@@ -16,9 +16,28 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import StarRating from "./StarRating";
+import { useSession } from "next-auth/react";
+import { useToast } from "./ui/use-toast";
 
 export default function HotelRoomCard({ info }: any) {
-    console.log(info);
+    const { data: session } = useSession();
+    const { toast } = useToast();
+    const submitBooking = () => {
+        console.log(session?.user);
+        if (session?.user == undefined) {
+            toast({
+                title: "Error",
+                description: "You need to be logged in to create a booking",
+                variant: "destructive",
+            });
+        } else {
+            toast({
+                title: "Success",
+                description: "You successfully created a booking",
+            });
+        }
+    };
+
     return (
         <AlertDialog>
             <AlertDialogTrigger>
@@ -103,7 +122,10 @@ export default function HotelRoomCard({ info }: any) {
                 </AlertDialogDescription>
                 <AlertDialogFooter className="mt-5">
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction className="px-4 py-2 rounded-xl bg-gradient-to-br from-[#e11d48] to-[#e11daa] text-sm font-bold text-white">
+                    <AlertDialogAction
+                        className="px-4 py-2 rounded-xl bg-gradient-to-br from-[#e11d48] to-[#e11daa] text-sm font-bold text-white"
+                        onClick={() => submitBooking()}
+                    >
                         Book Now
                     </AlertDialogAction>
                 </AlertDialogFooter>

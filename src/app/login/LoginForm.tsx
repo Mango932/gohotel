@@ -6,20 +6,14 @@ import { cn } from "../../lib/utils";
 import { useToast } from "@/components/ui/use-toast";
 
 interface FormData {
-    firstname: string;
-    lastname: string;
     email: string;
     password: string;
-    confirmPassword: string;
 }
 
-export default function SignupForm({ formSubmit }: any) {
+export default function LoginForm({ formSubmit }: any) {
     const [formData, setFormData] = useState<FormData>({
-        firstname: "",
-        lastname: "",
         email: "",
         password: "",
-        confirmPassword: "",
     });
     const { toast } = useToast();
 
@@ -43,14 +37,6 @@ export default function SignupForm({ formSubmit }: any) {
                 });
                 return;
             }
-        }
-        if (formData.password != formData.confirmPassword) {
-            toast({
-                title: "Error",
-                description: "Make sure your passwords match!",
-                variant: "destructive",
-            });
-            return;
         }
 
         //Add the call to the database to send accont data
