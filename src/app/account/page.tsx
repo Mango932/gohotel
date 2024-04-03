@@ -1,46 +1,61 @@
 "use client";
 import Navbar from "@/components/Navbar";
-import {
-    SetStateAction,
-    useCallback,
-    useEffect,
-    useMemo,
-    useState,
-} from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useState } from "react";
 import { PersonIcon } from "@radix-ui/react-icons";
-import { Booking, columns } from "@/app/account/columns";
+import { columns } from "@/app/account/columns";
 import { DataTable } from "@/app/account/data-table";
-import { findBookings } from "@/app/api/Bookings";
+import useSWR from "swr";
+import { useSession } from "next-auth/react";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
-// Just some hard-coded data
-interface Account {
-    accountName: string;
-    accountPFPpath: string;
-}
+const fetchBookings = async (url: string) => {
+    try {
+        const response = await fetch(`/api/account?${url}`);
+        if (!response.ok) {
+            throw new Error("Failed to fetch booking");
+        }
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error("Error fetching bookings:", error);
+        return []; // Return empty array if there's an error
+    }
+};
 
 export default function account() {
-    const [bookings, setBookings] = useState<Booking[]>([]);
+    const { data: session } = useSession();
+    const [name, setName] = useState();
+    //@ts-ignore
+    const id = session?.user?.id;
 
-    useEffect(() => {
-        // Define your async function within the useEffect hook
-        async function fetchBookings() {
-            try {
-                const bookingDB = await findBookings(1);
-            } catch (error) {
-                console.error("Error fetching bookings:", error);
-            }
+    const { data, isLoading } = useSWR(`/api/account?id=${id}`, fetchBookings);
+    const { toast } = useToast();
+    const router = useRouter();
+
+    const onDelete = async (booking: any) => {
+        const response = await fetch("/api/account", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                bookingId: booking.booking_id,
+            }),
+        });
+
+        if (!response.ok) {
+            toast({
+                title: "Error",
+                description: "Deletion failed",
+                variant: "destructive",
+            });
+        } else {
+            toast({
+                title: "Success",
+                description: "You successfully deleted the booking",
+            });
         }
-
-        // Call the function when the component mounts or when the page reloads
-        fetchBookings();
-    }, []);
-
-    const onDelete = (booking: Booking) => {
-        const newBooking = bookings.filter(
-            (item) => item.booking_id !== booking.booking_id
-        );
-        setBookings(newBooking);
     };
 
     return (
@@ -52,7 +67,12 @@ export default function account() {
                         <PersonIcon className="scale-[800%]" />
                     </div>
                     <h2 className="w-full h-full text-center text-3xl text-neutral-800 dark:text-neutral-200 p-5">
-                        GoHotel Account
+                        Welcome{" "}
+                        {data && data[1] ? (
+                            <span>{data[1].person.first_name}</span>
+                        ) : (
+                            <></>
+                        )}
                     </h2>
                 </div>
                 <div className="flex flex-col basis-2/3 mx-5 pt-10">
@@ -60,10 +80,14 @@ export default function account() {
                         My Bookings
                     </h2>
                     <div className="w-full max-w-[1440px]">
-                        <DataTable
-                            columns={columns({ onDelete })}
-                            data={bookings}
-                        />
+                        {data && data[0] ? (
+                            <DataTable
+                                columns={columns({ onDelete })}
+                                data={data[0]}
+                            />
+                        ) : (
+                            <></>
+                        )}
                     </div>
                 </div>
             </div>

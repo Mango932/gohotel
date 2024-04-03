@@ -3,13 +3,11 @@
 import React from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import DataTableRowActions from "./DataTableRowActions";
-import { booking } from "@prisma/client"
-
+import { booking } from "@prisma/client";
 
 export type Booking = booking & {
     cost: number;
-}
-
+};
 
 interface deleteBookingProps {
     onDelete: (booking: Booking) => void;

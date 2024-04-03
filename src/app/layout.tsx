@@ -21,6 +21,7 @@ export default function RootLayout({ children }: any) {
                         "min-h-screen bg-background font-sans antialiased",
                         fontSans.variable
                     )}
+                    suppressHydrationWarning={true}
                 >
                     <ThemeProvider
                         attribute="class"

@@ -14,9 +14,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
-import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
+    const router = useRouter();
     const { data: session } = useSession();
     const login = !(session?.user == undefined);
 
@@ -33,9 +34,9 @@ export default function Navbar() {
             </Link>
 
             <div className="flex gap-3 ">
-                <NavbarButton name="Locations" page={"/"} />
+                {/* <NavbarButton name="Locations" page={"/"} /> */}
                 <NavbarButton name="Book a room" page={"/"} />
-                <NavbarButton name="Support" page={"/"} />
+                {/* <NavbarButton name="Support" page={"/"} /> */}
             </div>
 
             <div className="flex justify-end gap-5 w-52">
@@ -66,7 +67,12 @@ export default function Navbar() {
                                 <DropdownMenuItem>
                                     <Link href="/account">My Account</Link>
                                 </DropdownMenuItem>
-                                <DropdownMenuItem onClick={() => signOut()}>
+                                <DropdownMenuItem
+                                    onClick={() => {
+                                        signOut();
+                                        router.push("/");
+                                    }}
+                                >
                                     Log out
                                 </DropdownMenuItem>
                             </>
