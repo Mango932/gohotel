@@ -29,11 +29,18 @@ export default function SearchPage() {
         search.get("traveler") || ""
     )}&startDate=${encodeURIComponent(
         search.get("startDate") || ""
-    )}&endDate=${encodeURIComponent(search.get("endDate") || "")}`;
-    const encodedSearchQuery = encodeURI(searchQuery);
+    )}&endDate=${encodeURIComponent(
+        search.get("endDate") || ""
+    )}&hotelChain=${encodeURIComponent(
+        search.get("hotelChain") || ""
+    )}&rating=${encodeURIComponent(
+        search.get("rating") || ""
+    )}&maxPrice=${encodeURIComponent(
+        search.get("maxPrice") || ""
+    )}&roomAmount=${encodeURIComponent(search.get("roomAmount") || "")}`;
 
     const { data, isLoading } = useSWR(
-        `/api/search?${encodedSearchQuery}`,
+        `/api/search?${searchQuery}`,
         fetchRooms
     );
 

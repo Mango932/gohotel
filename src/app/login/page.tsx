@@ -3,8 +3,10 @@ import Navbar from "@/components/Navbar";
 import LoginForm from "@/app/login/LoginForm";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function signin() {
+    const { toast } = useToast();
     //function that handles submitting data to the database
     const router = useRouter();
     const formSubmit = async (data: any) => {
@@ -15,7 +17,11 @@ export default function signin() {
         });
 
         if (signInData?.error) {
-            console.log(signInData.error);
+            toast({
+                title: "Error",
+                description: "You must me logged in to make a booking",
+                variant: "destructive",
+            });
         } else {
             router.push("/");
         }

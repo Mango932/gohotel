@@ -95,7 +95,9 @@ export default function HotelRoomCard({ info }: any) {
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <div className="flex justify-between items-center">
-                        <div className="text-3xl font-bold ">{info.title}</div>
+                        <div className="text-3xl font-bold ">
+                            {info.hotel_name}
+                        </div>
                         <div className="px-4 py-2 rounded-xl text-sm font-normal ">
                             {info.address}
                         </div>
