@@ -3,7 +3,6 @@
 import Image from "next/image";
 import React from "react";
 import { CardBody, CardContainer, CardItem } from "./ui/3d-card";
-import Link from "next/link";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -71,7 +70,7 @@ export default function HotelRoomCard({ info }: any) {
         <AlertDialog>
             <AlertDialogTrigger>
                 <CardContainer className="inter-var">
-                    <CardBody className="relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-background dark:border-white/[0.2] border-black/[0.3] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
+                    <CardBody className="relative group/card  bg-secondary dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-background dark:border-white/[0.2] border-black/[0.3] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
                         <div className="flex justify-between items-center">
                             <CardItem
                                 translateZ="20"
