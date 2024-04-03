@@ -33,8 +33,7 @@ const getStringDate = (date: any): string => {
         "-" +
         (date.getDate() || 0 < 10
             ? "0" + (date.getDate() || "")
-            : date.getDate()) +
-        "T00.00.00.000Z";
+            : date.getDate());
     return stringDate;
 };
 

@@ -35,7 +35,6 @@ export default function SignupForm({ formSubmit }: any) {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(formData);
         for (let key in formData) {
             if ((formData as any)[key] == "") {
                 toast({

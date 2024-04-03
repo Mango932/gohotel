@@ -18,12 +18,13 @@ import {
 import StarRating from "./StarRating";
 import { useSession } from "next-auth/react";
 import { useToast } from "./ui/use-toast";
+import { useSearchParams } from "next/navigation";
 
 export default function HotelRoomCard({ info }: any) {
     const { data: session } = useSession();
     const { toast } = useToast();
-    const submitBooking = () => {
-        console.log(session?.user);
+
+    const submitBooking = async () => {
         if (session?.user == undefined) {
             toast({
                 title: "Error",
@@ -31,12 +32,40 @@ export default function HotelRoomCard({ info }: any) {
                 variant: "destructive",
             });
         } else {
-            toast({
-                title: "Success",
-                description: "You successfully created a booking",
+            const response = await fetch("/api/createBooking", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    //@ts-ignore
+                    userId: session.user.id,
+                    roomNumber: info.room_number,
+                    hotelName: info.hotel_name,
+                    startDate: start,
+                    endDate: end,
+                }),
             });
+
+            if (!response.ok) {
+                console.error("Booking unsuccessful");
+                toast({
+                    title: "Error",
+                    description: "Booking unsuccessful",
+                    variant: "destructive",
+                });
+            } else {
+                toast({
+                    title: "Success",
+                    description: "You successfully created a booking",
+                });
+            }
         }
     };
+
+    const search = useSearchParams();
+    const start = search.get("startDate");
+    const end = search.get("endDate");
 
     return (
         <AlertDialog>
@@ -46,19 +75,28 @@ export default function HotelRoomCard({ info }: any) {
                         <div className="flex justify-between items-center">
                             <CardItem
                                 translateZ="20"
-                                className="text-3xl font-bold "
+                                className="text-3xl font-bold flex items-end"
                             >
                                 {info.hotel_name}
+                                <p className="ml-4 text-lg font-normal">
+                                    {info.room_number}
+                                </p>
                             </CardItem>
                             <CardItem
                                 translateZ={20}
                                 className="px-4 py-2 rounded-xl text-sm font-normal "
                             >
-                                {info.address}
+                                {info.hotel.address}
                             </CardItem>
                         </div>
-
-                        <CardItem translateZ="40" className="w-full mt-6">
+                        <CardItem
+                            as="p"
+                            translateZ="30"
+                            className=" text-sm max-w-sm mt-3 "
+                        >
+                            {info.view_type}
+                        </CardItem>
+                        <CardItem translateZ="40" className="w-full mt-3">
                             <Image
                                 src={info.image || "/hotelroom.jpg"}
                                 height="1000"
@@ -67,13 +105,7 @@ export default function HotelRoomCard({ info }: any) {
                                 alt="Hotel room image"
                             />
                         </CardItem>
-                        <CardItem
-                            as="p"
-                            translateZ="30"
-                            className=" text-sm max-w-sm mt-5 mx-2 "
-                        >
-                            {info.description}
-                        </CardItem>
+
                         <div className="flex justify-between items-center mt-8">
                             <CardItem
                                 translateZ={20}
@@ -99,18 +131,18 @@ export default function HotelRoomCard({ info }: any) {
                             {info.hotel_name}
                         </div>
                         <div className="px-4 py-2 rounded-xl text-sm font-normal ">
-                            {info.address}
+                            {info.hotel.address}
                         </div>
                     </div>
                 </AlertDialogHeader>
                 <AlertDialogDescription className="">
-                    <div>{info.description}</div>
                     <div className="flex mt-10 gap-10 justify-between">
                         <div className="text-lg flex flex-col gap-2">
+                            <div>View: {info.view_type}</div>
                             <div>Capacity: {info.capacity}</div>
-                            <div>Dates: temp</div>
-
-                            <StarRating value={info.stars} />
+                            <div>Start: {start}</div>
+                            <div>End: {end}</div>
+                            <StarRating value={info.hotel.stars} />
                             <div>CAD ${info.price}</div>
                         </div>
                         <Image

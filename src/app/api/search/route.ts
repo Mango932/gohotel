@@ -23,7 +23,11 @@ export async function GET(request: any) {
         maxPrice === "" &&
         roomAmount === ""
     ) {
-        const rooms: any = await prisma.room.findMany();
+        const rooms: any = await prisma.room.findMany({
+            include: {
+                hotel: true, // Include all fields from the related hotel
+            },
+        });
         if (rooms == undefined) {
             return NextResponse.json([]);
         }
@@ -41,11 +45,7 @@ export async function GET(request: any) {
                         ? { hotel: { address: { startsWith: location } } }
                         : {},
                     // Filter by availability if startDate and endDate parameters are provided
-                    startDate !== "" && endDate !== ""
-                        ? {
-                              AND: [],
-                          }
-                        : {},
+
                     // Filter by hotel chain if hotelChain parameter is provided
                     hotelChain !== ""
                         ? {
@@ -57,7 +57,9 @@ export async function GET(request: any) {
                           }
                         : {},
                     // Filter by hotel category if hotelCategory parameter is provided
-                    rating !== "" ? { hotel: { stars: parseInt(rating) } } : {},
+                    rating !== ""
+                        ? { hotel: { stars: { gte: parseInt(rating) } } }
+                        : {},
                     // Filter by max price if maxPrice parameter is provided
                     maxPrice !== ""
                         ? { price: { lte: parseFloat(maxPrice) } }
@@ -67,6 +69,10 @@ export async function GET(request: any) {
                         ? { room_number: { lte: parseInt(roomAmount) } }
                         : {},
                 ],
+            },
+
+            include: {
+                hotel: true, // Include all fields from the related hotel
             },
         });
         if (rooms == undefined) {
