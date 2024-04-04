@@ -58,13 +58,11 @@ export const columns = ({
         accessorKey: "cost",
         header: () => <div className="text-right">Amount</div>,
         cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("cost"));
-            const formatted = new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "CAD",
-            }).format(amount);
-
-            return <div className="text-right font-medium">{formatted}</div>;
+            const data = row.original;
+            return (
+                //@ts-ignore
+                <div className="text-right font-medium">{data.room.price}</div>
+            );
         },
     },
     {

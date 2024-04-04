@@ -35,11 +35,24 @@ export const authOptions: NextAuthOptions = {
                     },
                 });
                 if (!existingUser) {
-                    return null;
+                    const existingUser = await prisma.employee.findFirst({
+                        where: {
+                            email: credentials?.email,
+                            password: credentials?.password,
+                        },
+                    });
+                    if (!existingUser) {
+                        return null;
+                    }
+                    return {
+                        id: `${existingUser?.sin}`,
+                        type: "employee",
+                    };
                 }
 
                 return {
                     id: `${existingUser?.id}`,
+                    type: "customer",
                 };
             },
         }),

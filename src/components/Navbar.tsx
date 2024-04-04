@@ -20,6 +20,8 @@ export default function Navbar() {
     const router = useRouter();
     const { data: session } = useSession();
     const login = !(session?.user == undefined);
+    //@ts-ignore
+    const type = session?.user?.type;
 
     return (
         <div className="flex justify-between h-20 items-center px-16 border-b-2 border-secondary">
@@ -35,7 +37,12 @@ export default function Navbar() {
 
             <div className="flex gap-3 ">
                 {/* <NavbarButton name="Locations" page={"/"} /> */}
-                <NavbarButton name="Book a room" page={"/"} />
+
+                {type == "customer" ? (
+                    <NavbarButton name="Book a room" page={"/"} />
+                ) : (
+                    <NavbarButton name="Dashboard" page={"/dashboard"} />
+                )}
                 {/* <NavbarButton name="Support" page={"/"} /> */}
             </div>
 
@@ -64,9 +71,14 @@ export default function Navbar() {
                         )}
                         {login && (
                             <>
-                                <DropdownMenuItem>
-                                    <Link href="/account">My Account</Link>
-                                </DropdownMenuItem>
+                                {type == "customer" ? (
+                                    <DropdownMenuItem>
+                                        <Link href="/account">My Account</Link>
+                                    </DropdownMenuItem>
+                                ) : (
+                                    <></>
+                                )}
+
                                 <DropdownMenuItem
                                     onClick={() => {
                                         signOut();
