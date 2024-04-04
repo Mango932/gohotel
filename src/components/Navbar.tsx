@@ -38,10 +38,10 @@ export default function Navbar() {
             <div className="flex gap-3 ">
                 {/* <NavbarButton name="Locations" page={"/"} /> */}
 
-                {type == "customer" ? (
-                    <NavbarButton name="Book a room" page={"/"} />
-                ) : (
+                {type == "employee" ? (
                     <NavbarButton name="Dashboard" page={"/dashboard"} />
+                ) : (
+                    <NavbarButton name="Book a room" page={"/"} />
                 )}
                 {/* <NavbarButton name="Support" page={"/"} /> */}
             </div>
@@ -49,7 +49,7 @@ export default function Navbar() {
             <div className="flex justify-end gap-5 w-52">
                 <ThemeToggle />
                 <DropdownMenu>
-                    <DropdownMenuTrigger>
+                    <DropdownMenuTrigger className="rounded-full">
                         <Avatar>
                             <AvatarImage src="" />
                             <AvatarFallback>

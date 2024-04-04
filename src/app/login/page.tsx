@@ -4,11 +4,21 @@ import LoginForm from "@/app/login/LoginForm";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
+import { useSession } from "next-auth/react";
 
 export default function signin() {
     const { toast } = useToast();
     //function that handles submitting data to the database
     const router = useRouter();
+    const { data: session } = useSession();
+    //@ts-ignore
+    const type = session?.user?.type;
+
+    if (type == "customer") {
+        router.push("/");
+    } else if (type == "employee") {
+        router.push("/dashboard");
+    }
     const formSubmit = async (data: any) => {
         const signInData = await signIn("credentials", {
             email: data.email,
@@ -19,11 +29,11 @@ export default function signin() {
         if (signInData?.error) {
             toast({
                 title: "Error",
-                description: "You must me logged in to make a booking",
+                description: "Wrong email or password",
                 variant: "destructive",
             });
         } else {
-            router.push("/");
+            router.refresh();
         }
     };
 

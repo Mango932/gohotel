@@ -27,7 +27,6 @@ export default function LoginForm({ formSubmit }: any) {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(formData);
         for (let key in formData) {
             if ((formData as any)[key] == "") {
                 toast({
@@ -44,7 +43,10 @@ export default function LoginForm({ formSubmit }: any) {
     };
 
     return (
-        <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input border-dark-secondary border-2 bg-secondary dark:bg-background">
+        <div
+            className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input border-dark-secondary border-2 bg-secondary dark:bg-background"
+            suppressHydrationWarning
+        >
             <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
                 Login to your account
             </h2>
@@ -54,7 +56,7 @@ export default function LoginForm({ formSubmit }: any) {
                     <Label htmlFor="email">Email Address</Label>
                     <Input
                         name="email"
-                        placeholder="projectmayhem@fc.com"
+                        placeholder=""
                         type=""
                         onChange={handleChange}
                     />

@@ -63,6 +63,8 @@ export const authOptions: NextAuthOptions = {
                 return {
                     ...token,
                     id: user.id,
+                    //@ts-ignore
+                    type: user.type,
                 };
             }
             return token;
@@ -73,6 +75,7 @@ export const authOptions: NextAuthOptions = {
                 user: {
                     ...session.user,
                     id: token.id,
+                    type: token.type,
                 },
             };
         },
