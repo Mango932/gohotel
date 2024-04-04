@@ -33,6 +33,10 @@ export default function account() {
     const { toast } = useToast();
     const router = useRouter();
 
+    if (!session?.user) {
+        router.replace("/");
+    }
+
     const onDelete = async (booking: any) => {
         const response = await fetch("/api/account", {
             method: "POST",

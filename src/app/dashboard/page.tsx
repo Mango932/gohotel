@@ -53,6 +53,10 @@ export default function dashboard() {
     const { toast } = useToast();
     const router = useRouter();
 
+    if (!session?.user) {
+        router.replace("/");
+    }
+
     const bookToRent = async (booking: any) => {
         const response = await fetch("/api/createRentingFromBooking", {
             method: "POST",
