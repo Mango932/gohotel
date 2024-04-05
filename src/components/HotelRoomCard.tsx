@@ -18,7 +18,7 @@ import StarRating from "./StarRating";
 import { useSession } from "next-auth/react";
 import { useToast } from "./ui/use-toast";
 
-export default function HotelRoomCard({ info, start, end }: any) {
+export default function HotelRoomCard({ info, start, end, index }: any) {
     const { data: session } = useSession();
     const { toast } = useToast();
 
@@ -65,20 +65,17 @@ export default function HotelRoomCard({ info, start, end }: any) {
         <AlertDialog>
             <AlertDialogTrigger>
                 <CardContainer className="inter-var">
-                    <CardBody className="relative group/card  bg-secondary dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-background dark:border-white/[0.2] border-black/[0.3] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
+                    <CardBody className="relative group/card bg-gray-100 dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-background dark:border-white/[0.2] border-secondary/[1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border">
                         <div className="flex justify-between items-center">
                             <CardItem
                                 translateZ="20"
-                                className="text-3xl font-bold flex items-end"
+                                className="text-2xl font-bold flex items-end"
                             >
                                 {info.hotel_name}
-                                <p className="ml-4 text-lg font-normal">
-                                    {info.room_number}
-                                </p>
                             </CardItem>
                             <CardItem
                                 translateZ={20}
-                                className="px-4 py-2 rounded-xl text-sm font-normal "
+                                className="px-4 py-2 rounded-xl text-xs font-normal "
                             >
                                 {info.hotel.address}
                             </CardItem>
@@ -93,11 +90,14 @@ export default function HotelRoomCard({ info, start, end }: any) {
                         <CardItem translateZ="40" className="w-full mt-3">
                             <Image
                                 priority
-                                src={info.image || "/hotelroom.jpg"}
+                                src={
+                                    info.image ||
+                                    `/hotelroom${(index % 10) + 1}.jpg`
+                                }
                                 height="1000"
                                 width="1000"
                                 className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
-                                alt="Hotel room image"
+                                alt="Hotel Image"
                             />
                         </CardItem>
 
@@ -122,15 +122,16 @@ export default function HotelRoomCard({ info, start, end }: any) {
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <div className="flex justify-between items-center">
-                        <div className="text-3xl font-bold ">
+                        <div className="text-2xl font-bold ">
                             {info.hotel_name}
                         </div>
-                        <div className="px-4 py-2 rounded-xl text-sm font-normal ">
+                        <div className="pr-4 py-2 rounded-xl text-xs font-normal ">
                             {info.hotel.address}
                         </div>
                     </div>
                     <div className="flex pt-10 gap-10 justify-between">
                         <div className="text-lg flex flex-col gap-2">
+                            <div>Room: {info.room_number}</div>
                             <div>View: {info.view_type}</div>
                             <div>Capacity: {info.capacity}</div>
                             <div>Start: {start}</div>
@@ -139,11 +140,11 @@ export default function HotelRoomCard({ info, start, end }: any) {
                             <div>CAD ${info.price}</div>
                         </div>
                         <Image
-                            src="/hotelroom.jpg"
+                            src={`/hotelroom${(index % 10) + 1}.jpg`}
                             height="1000"
                             width="1000"
                             className="h-50 w-64 object-cover rounded-xl group-hover/card:shadow-xl"
-                            alt="thumbnail"
+                            alt="Hotel Image"
                         />
                     </div>
                 </AlertDialogHeader>

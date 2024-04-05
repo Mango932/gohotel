@@ -13,29 +13,112 @@ VALUES (1, 'johndoe@example.com', 'password1', '2023-01-15'),
 
 -- Example data for the Hotel_Chain table
 INSERT INTO Hotel_Chain (Name, Hotel_Amount)
-VALUES ('Example Chain', 3),
-       ('Another Chain', 2);
+VALUES ('Holiday In', 1),
+        ('TravelFree', 2),
+       ('GreatVacation', 3);
 
 -- Example data for the Hotel table
-INSERT INTO Hotel (Hotel_Name, Number_of_Rooms, Email, Address, Stars, Phone_Number, HotelChain_ID)
-VALUES ('Hotel A', 50, 'hotelA@example.com', '123 Main St', 4, '123-456-7890', 1),
-       ('Hotel B', 40, 'hotelB@example.com', '456 Elm St', 3, '987-654-3210', 1),
-       ('Hotel C', 60, 'hotelC@example.com', '789 Oak St', 5, '456-789-0123', 2);
+INSERT INTO Hotel (Hotel_Name, Number_of_Rooms, Email, Address, Stars, Phone_Number, HotelChain_ID, location)
+VALUES 
+    ('Sakura Inn', 40, 'sakura@example.com', '1 Cherry Blossom Ln', 3, '123-456-7890', 1, 'Japan'),
+    ('Maple Leaf Hotel', 30, 'mapleleaf@example.com', '10 Maple St', 4, '987-654-3210', 1, 'Canada'),
+    ('Golden Gate Lodge', 50, 'goldengate@example.com', '100 Golden Gate Blvd', 5, '456-789-0123', 2, 'United States'),
+    ('Tokyo Tower Suites', 25, 'tokyotower@example.com', '2 Tokyo Tower Ave', 4, '111-222-3333', 1, 'Japan'),
+    ('Snowy Peaks Resort', 35, 'snowypeaks@example.com', '20 Mountain Rd', 4, '444-555-6666', 2, 'Canada'),
+    ('Liberty Hotel', 60, 'liberty@example.com', '30 Liberty St', 5, '777-888-9999', 2, 'United States'),
+    ('Cherry Blossom Plaza', 45, 'cherryblossom@example.com', '3 Cherry Blossom Rd', 3, '666-777-8888', 1, 'Japan'),
+    ('Rocky Mountain Lodge', 55, 'rockymountain@example.com', '40 Rocky Mountain Dr', 4, '222-333-4444', 3, 'Canada'),
+    ('Empire Grand Hotel', 65, 'empiregrand@example.com', '50 Empire Blvd', 5, '999-000-1111', 3, 'United States'),
+    ('Mount Fuji Inn', 20, 'mountfuji@example.com', '4 Mount Fuji Ave', 3, '888-999-0000', 1, 'Japan'),
+    ('Niagara Falls Hotel', 70, 'niagarafalls@example.com', '60 Falls Blvd', 4, '333-444-5555', 2, 'Canada'),
+    ('Statue of Liberty Suites', 75, 'statueofliberty@example.com', '70 Liberty Ave', 5, '000-111-2222', 3, 'United States'),
+    ('Hakone Hot Springs Resort', 80, 'hakonehotsprings@example.com', '5 Hot Springs Rd', 4, '111-222-3333', 1, 'Japan'),
+    ('Banff Mountain Lodge', 40, 'banffmountain@example.com', '80 Mountain View Dr', 4, '444-555-6666', 2, 'Canada'),
+    ('Hollywood Glamour Hotel', 85, 'hollywoodglamour@example.com', '90 Sunset Blvd', 5, '777-888-9999', 3, 'United States'),
+    ('Kyoto Castle Inn', 50, 'kyotocastle@example.com', '6 Castle Rd', 3, '666-777-8888', 1, 'Japan'),
+    ('Whistler Ski Resort', 55, 'whistler@example.com', '100 Ski Hill Rd', 4, '222-333-4444', 2, 'Canada'),
+    ('Times Square Towers', 90, 'timessquare@example.com', '10 Broadway', 5, '999-000-1111', 3, 'United States'),
+    ('Osaka Gardens Hotel', 60, 'osakagardens@example.com', '7 Garden Ave', 3, '888-999-0000', 1, 'Japan'),
+    ('Montreal Artisan Hotel', 65, 'montrealartisan@example.com', '110 Art St', 4, '333-444-5555', 2, 'Canada');
 
 -- Example data for the Room table
+-- Rooms for Sakura Inn
 INSERT INTO Room (Room_Number, Hotel_Name, Price, Capacity, View_Type)
-VALUES (101, 'Hotel A', 100, 2, 'City View'),
-       (102, 'Hotel A', 120, 2, 'City View'),
-       (201, 'Hotel B', 90, 2, 'Garden View'),
-       (202, 'Hotel B', 110, 2, 'Garden View'),
-       (301, 'Hotel C', 150, 4, 'Ocean View'),
-       (302, 'Hotel C', 200, 4, 'Ocean View');
+VALUES 
+    (101, 'Sakura Inn', 100, 2, 'City View'),
+    (201, 'Sakura Inn', 120, 2, 'Garden View'),
+    (301, 'Sakura Inn', 110, 2, 'Mountain View'),
+    (401, 'Sakura Inn', 130, 3, 'Lake View'),
+    (501, 'Sakura Inn', 150, 4, 'Ocean View');
+
+-- Rooms for Maple Leaf Hotel
+INSERT INTO Room (Room_Number, Hotel_Name, Price, Capacity, View_Type)
+VALUES 
+    (101, 'Maple Leaf Hotel', 90, 2, 'City View'),
+    (201, 'Maple Leaf Hotel', 110, 2, 'Garden View'),
+    (301, 'Maple Leaf Hotel', 100, 2, 'Mountain View'),
+    (401, 'Maple Leaf Hotel', 120, 3, 'Lake View'),
+    (501, 'Maple Leaf Hotel', 140, 4, 'Ocean View');
+
+-- Rooms for Golden Gate Lodge
+INSERT INTO Room (Room_Number, Hotel_Name, Price, Capacity, View_Type)
+VALUES 
+    (101, 'Golden Gate Lodge', 150, 2, 'City View'),
+    (201, 'Golden Gate Lodge', 170, 2, 'Garden View'),
+    (301, 'Golden Gate Lodge', 160, 3, 'Mountain View'),
+    (401, 'Golden Gate Lodge', 180, 3, 'Lake View'),
+    (501, 'Golden Gate Lodge', 200, 4, 'Ocean View');
+
+-- Rooms for Tokyo Tower Suites
+INSERT INTO Room (Room_Number, Hotel_Name, Price, Capacity, View_Type)
+VALUES 
+    (101, 'Tokyo Tower Suites', 100, 2, 'City View'),
+    (201, 'Tokyo Tower Suites', 120, 2, 'Garden View'),
+    (301, 'Tokyo Tower Suites', 110, 3, 'Mountain View'),
+    (401, 'Tokyo Tower Suites', 130, 3, 'Lake View'),
+    (501, 'Tokyo Tower Suites', 150, 4, 'Ocean View');
+
+-- Rooms for Snowy Peaks Resort
+INSERT INTO Room (Room_Number, Hotel_Name, Price, Capacity, View_Type)
+VALUES 
+    (101, 'Snowy Peaks Resort', 90, 2, 'City View'),
+    (201, 'Snowy Peaks Resort', 110, 2, 'Garden View'),
+    (301, 'Snowy Peaks Resort', 100, 3, 'Mountain View'),
+    (401, 'Snowy Peaks Resort', 120, 3, 'Lake View'),
+    (501, 'Snowy Peaks Resort', 140, 4, 'Ocean View');
+
+-- Rooms for Liberty Hotel
+INSERT INTO Room (Room_Number, Hotel_Name, Price, Capacity, View_Type)
+VALUES 
+    (101, 'Liberty Hotel', 100, 2, 'City View'),
+    (201, 'Liberty Hotel', 120, 2, 'Garden View'),
+    (301, 'Liberty Hotel', 110, 3, 'Mountain View'),
+    (401, 'Liberty Hotel', 130, 3, 'Lake View'),
+    (501, 'Liberty Hotel', 150, 4, 'Ocean View');
+
+-- Rooms for Cherry Blossom Plaza
+INSERT INTO Room (Room_Number, Hotel_Name, Price, Capacity, View_Type)
+VALUES 
+    (101, 'Cherry Blossom Plaza', 100, 2, 'City View'),
+    (201, 'Cherry Blossom Plaza', 120, 2, 'Garden View'),
+    (301, 'Cherry Blossom Plaza', 110, 3, 'Mountain View'),
+    (401, 'Cherry Blossom Plaza', 130, 3, 'Lake View'),
+    (501, 'Cherry Blossom Plaza', 150, 4, 'Ocean View');
+
+-- Rooms for Rocky Mountain Lodge
+INSERT INTO Room (Room_Number, Hotel_Name, Price, Capacity, View_Type)
+VALUES 
+    (101, 'Rocky Mountain Lodge', 100, 2, 'City View'),
+    (201, 'Rocky Mountain Lodge', 120, 2, 'Garden View'),
+    (301, 'Rocky Mountain Lodge', 110, 3, 'Mountain View'),
+    (401, 'Rocky Mountain Lodge', 130, 3, 'Lake View'),
+    (501, 'Rocky Mountain Lodge', 150, 4, 'Ocean View');
 
 -- Example data for the Employee table
 INSERT INTO Employee (SIN, Email, Password, Role, Hotel_Name)
-VALUES (123456789, 'employee1@hotalA.com', 'Epassword1', 'Manager', 'Hotel A'),
-       (987654321, 'employee1@hotalB.com', 'Epassword2', 'Receptionist', 'Hotel B'),
-       (456789012, 'employee1@hotalC.com', 'Epassword3', 'Housekeeping', 'Hotel C');
+VALUES (123456789, 'employee1@hotalA.com', 'Epassword1', 'Manager', 'Sakura Inn'),
+       (987654321, 'employee1@hotalB.com', 'Epassword2', 'Receptionist', 'Maple Leaf Hotel'),
+       (456789012, 'employee1@hotalC.com', 'Epassword3', 'Housekeeping', 'Golden Gate Lodge');
 
 -- Example data for the Office table
 INSERT INTO Office (Chain_ID, Address, Email, Phone_Number)
@@ -49,8 +132,8 @@ VALUES ('2023-03-01', '2023-03-10', '2023-03-15', 1, 101, 'Hotel A', 2),
 
 -- Example data for the Renting table
 INSERT INTO Renting (Date, Check_In, Check_Out, Customer_ID, Employee_SIN, Room_Booked, Hotel_Name, status_id)
-VALUES ('2023-04-01', '2023-04-10', '2023-04-15', 1, '123456789', 201, 'Hotel B', 1),
-       ('2023-04-02', '2023-04-12', '2023-04-18', 2, '987654321', 302, 'Hotel C', 1);
+VALUES ('2023-04-01', '2023-04-10', '2023-04-15', 1, '123456789', 101, 'Sakura Inn', 1),
+       ('2023-04-02', '2023-04-12', '2023-04-18', 2, '987654321', 101, 'Maple Leaf Hotel', 1);
 
 -- Example data for the Payment table
 INSERT INTO Payment (Renting_ID, Amount, Date, Payment_Type)

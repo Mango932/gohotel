@@ -47,7 +47,7 @@ export async function GET(request: any) {
                 price: { lte: parseFloat(maxPrice) },
 
                 hotel: {
-                    address: { startsWith: location },
+                    location: { startsWith: location },
                     stars: { gte: parseInt(rating) },
                     number_of_rooms: { lte: parseInt(roomAmount) },
                     hotel_chain: {

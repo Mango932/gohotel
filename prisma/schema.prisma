@@ -51,6 +51,7 @@ model employee {
 model hotel {
   hotel_name      String      @id @db.VarChar(100)
   number_of_rooms Int
+  location           String?     @db.VarChar(100)
   email           String?     @db.VarChar(100)
   address         String      @db.VarChar(255)
   stars           Int?

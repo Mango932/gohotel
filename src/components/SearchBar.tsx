@@ -23,6 +23,13 @@ import { Input } from "./ui/input";
 import { Slider } from "@/components/ui/slider";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import ColorButton from "./ColorButton";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 const getStringDate = (date: any): string => {
     const stringDate =
@@ -81,7 +88,18 @@ export default function SearchBar() {
                 <div className="flex w-full justify-center items-end gap-5 mt-10 flex-wrap">
                     <div>
                         <Label htmlFor="location">Location</Label>
-                        <SeachBox onLocationChange={onLocationChange} />
+                        <Select onValueChange={(e) => onLocationChange(e)}>
+                            <SelectTrigger className="w-60 mt-2">
+                                <SelectValue placeholder="Ex: Japan" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="Canada">Canada</SelectItem>
+                                <SelectItem value="United States">
+                                    United States
+                                </SelectItem>
+                                <SelectItem value="Japan">Japan</SelectItem>
+                            </SelectContent>
+                        </Select>
                     </div>
                     <div>
                         <Label htmlFor="date">Date</Label>
