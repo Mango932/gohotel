@@ -129,21 +129,22 @@ export default function HotelRoomCard({ info, start, end, index }: any) {
                             {info.hotel.address}
                         </div>
                     </div>
-                    <div className="flex pt-10 gap-10 justify-between">
+                    <div className="flex pt-10 gap-10 justify-between items-center">
                         <div className="text-lg flex flex-col gap-2">
                             <div>Room: {info.room_number}</div>
                             <div>View: {info.view_type}</div>
                             <div>Capacity: {info.capacity}</div>
                             <div>Start: {start}</div>
                             <div>End: {end}</div>
+                            <div>Country: {info.hotel.location}</div>
                             <StarRating value={info.hotel.stars} />
                             <div>CAD ${info.price}</div>
                         </div>
                         <Image
                             src={`/hotelroom${(index % 10) + 1}.jpg`}
-                            height="1000"
-                            width="1000"
-                            className="h-50 w-64 object-cover rounded-xl group-hover/card:shadow-xl"
+                            height="200"
+                            width="200"
+                            className="h-[200px] w-[200px] object-cover rounded-xl group-hover/card:shadow-xl"
                             alt="Hotel Image"
                         />
                     </div>
