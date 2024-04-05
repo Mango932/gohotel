@@ -7,35 +7,35 @@ import { Input } from "./ui/input";
 
 const libraries: Libraries = ["places"];
 
-export default function SeachBox({ onLocationChange }: any) {
-    const googleMapsApiKey: string = process.env.NEXT_PUBLIC_MAPS_API_KEY || "";
+// export default function SeachBox({ onLocationChange }: any) {
+//     const googleMapsApiKey: string = process.env.NEXT_PUBLIC_MAPS_API_KEY || "";
 
-    const { isLoaded, loadError } = useGoogleMapsScript({
-        googleMapsApiKey,
-        libraries,
-    });
+//     const { isLoaded, loadError } = useGoogleMapsScript({
+//         googleMapsApiKey,
+//         libraries,
+//     });
 
-    if (loadError) {
-        console.log(loadError);
-        return;
-    }
-    if (isLoaded) {
-        return <AutoComplete onLocationChange={onLocationChange} />;
-    }
-    return <></>;
-}
+//     if (loadError) {
+//         console.log(loadError);
+//         return;
+//     }
+//     if (isLoaded) {
+//         return <AutoComplete onLocationChange={onLocationChange} />;
+//     }
+//     return <></>;
+// }
 
-export function AutoComplete({ onLocationChange }: any) {
-    const {
-        ready,
-        value,
-        setValue,
-        suggestions: { status, data },
-        clearSuggestions,
-    } = usePlacesAutocomplete({ debounce: 300 });
+export default function AutoComplete({ onLocationChange }: any) {
+    // const {
+    //     ready,
+    //     value,
+    //     setValue,
+    //     suggestions: { status, data },
+    //     clearSuggestions,
+    // } = usePlacesAutocomplete({ debounce: 300 });
 
     const ref = useOnclickOutside(() => {
-        clearSuggestions();
+        //clearSuggestions();
     });
 
     return (
@@ -45,18 +45,18 @@ export function AutoComplete({ onLocationChange }: any) {
                 name="location"
                 type="location"
                 placeholder="Ex: Japan"
-                value={value}
+                //value={value}
                 onChange={(e) => {
                     onLocationChange(e.target.value);
-                    setValue(e.target.value);
+                    //setValue(e.target.value);
                 }}
-                disabled={!ready}
+                //disabled={!ready}
             ></Input>
             {/* We can use the "status" to decide whether we should display the dropdown or not */}
-            {status === "OK" &&
+            {/* {status === "OK" &&
                 data.map(({ place_id, description }) => (
                     <ul key={place_id}>{description}</ul>
-                ))}
+                ))} */}
         </div>
     );
 }

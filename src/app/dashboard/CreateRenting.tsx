@@ -70,57 +70,55 @@ export default function CreateRenting({ rentingCreate }: any) {
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogDescription>
-                        <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl shadow-input  dark:bg-background">
-                            <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
-                                Create Renting
-                            </h2>
+                    <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl shadow-input  dark:bg-background">
+                        <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
+                            Create Renting
+                        </h2>
 
-                            <form className="my-8 mx-2">
-                                <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4 gap-5">
-                                    <LabelInputContainer>
-                                        <Label htmlFor="hotel_name">
-                                            Hotel Name
-                                        </Label>
-                                        <Input
-                                            name="hotel_name"
-                                            placeholder=""
-                                            type="text"
-                                            onChange={handleChange}
-                                            className="w-[18.75rem]"
-                                        />
-                                    </LabelInputContainer>
-                                    <LabelInputContainer className="w-full">
-                                        <Label htmlFor="room_booked">
-                                            Room Number
-                                        </Label>
-                                        <Input
-                                            name="room_booked"
-                                            placeholder=""
-                                            type="number"
-                                            onChange={handleChange}
-                                        />
-                                    </LabelInputContainer>
-                                </div>
-                                <LabelInputContainer className="mb-4 w-[18.75rem]">
-                                    <Label htmlFor="custId">Customer Id:</Label>
+                        <form className="my-8 mx-2">
+                            <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4 gap-5">
+                                <LabelInputContainer>
+                                    <Label htmlFor="hotel_name">
+                                        Hotel Name
+                                    </Label>
                                     <Input
-                                        name="custId"
+                                        name="hotel_name"
                                         placeholder=""
                                         type="text"
                                         onChange={handleChange}
+                                        className="w-[18.75rem]"
                                     />
                                 </LabelInputContainer>
-                                <LabelInputContainer>
-                                    <Label htmlFor="date">Dates</Label>
-                                    <Datepicker
-                                        date={formData.date}
-                                        onDateChange={onDateChange}
-                                    ></Datepicker>
+                                <LabelInputContainer className="w-full">
+                                    <Label htmlFor="room_booked">
+                                        Room Number
+                                    </Label>
+                                    <Input
+                                        name="room_booked"
+                                        placeholder=""
+                                        type="number"
+                                        onChange={handleChange}
+                                    />
                                 </LabelInputContainer>
-                            </form>
-                        </div>
-                    </AlertDialogDescription>
+                            </div>
+                            <LabelInputContainer className="mb-4 w-[18.75rem]">
+                                <Label htmlFor="custId">Customer Id:</Label>
+                                <Input
+                                    name="custId"
+                                    placeholder=""
+                                    type="text"
+                                    onChange={handleChange}
+                                />
+                            </LabelInputContainer>
+                            <LabelInputContainer>
+                                <Label htmlFor="date">Dates</Label>
+                                <Datepicker
+                                    date={formData.date}
+                                    onDateChange={onDateChange}
+                                ></Datepicker>
+                            </LabelInputContainer>
+                        </form>
+                    </div>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>

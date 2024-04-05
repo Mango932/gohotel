@@ -17,9 +17,8 @@ import {
 import StarRating from "./StarRating";
 import { useSession } from "next-auth/react";
 import { useToast } from "./ui/use-toast";
-import { useSearchParams } from "next/navigation";
 
-export default function HotelRoomCard({ info }: any) {
+export default function HotelRoomCard({ info, start, end }: any) {
     const { data: session } = useSession();
     const { toast } = useToast();
 
@@ -62,10 +61,6 @@ export default function HotelRoomCard({ info }: any) {
         }
     };
 
-    const search = useSearchParams();
-    const start = search.get("startDate");
-    const end = search.get("endDate");
-
     return (
         <AlertDialog>
             <AlertDialogTrigger>
@@ -97,6 +92,7 @@ export default function HotelRoomCard({ info }: any) {
                         </CardItem>
                         <CardItem translateZ="40" className="w-full mt-3">
                             <Image
+                                priority
                                 src={info.image || "/hotelroom.jpg"}
                                 height="1000"
                                 width="1000"
@@ -114,7 +110,6 @@ export default function HotelRoomCard({ info }: any) {
                             </CardItem>
                             <CardItem
                                 translateZ={20}
-                                as="button"
                                 className="px-4 py-2 rounded-xl bg-gradient-to-br from-[#e11d48] to-[#e11daa] text-sm font-bold text-white"
                             >
                                 Book Now
@@ -123,6 +118,7 @@ export default function HotelRoomCard({ info }: any) {
                     </CardBody>
                 </CardContainer>
             </AlertDialogTrigger>
+
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <div className="flex justify-between items-center">
@@ -133,9 +129,7 @@ export default function HotelRoomCard({ info }: any) {
                             {info.hotel.address}
                         </div>
                     </div>
-                </AlertDialogHeader>
-                <AlertDialogDescription className="">
-                    <div className="flex mt-10 gap-10 justify-between">
+                    <div className="flex pt-10 gap-10 justify-between">
                         <div className="text-lg flex flex-col gap-2">
                             <div>View: {info.view_type}</div>
                             <div>Capacity: {info.capacity}</div>
@@ -152,7 +146,8 @@ export default function HotelRoomCard({ info }: any) {
                             alt="thumbnail"
                         />
                     </div>
-                </AlertDialogDescription>
+                </AlertDialogHeader>
+
                 <AlertDialogFooter className="mt-5">
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
                     <AlertDialogAction

@@ -35,6 +35,60 @@ export async function POST(req: Request) {
             status_id: 1,
         };
 
+        const rentings: any = await prisma.renting.findMany({
+            where: {
+                OR: [
+                    {
+                        check_in: {
+                            lte: new Date(endDate),
+                            gte: new Date(startDate),
+                        },
+                        check_out: {
+                            lte: new Date(endDate),
+                            gte: new Date(startDate),
+                        },
+                    },
+                ],
+            },
+            select: { hotel_name: true, room_booked: true },
+        });
+
+        const bookings: any = await prisma.booking.findMany({
+            where: {
+                OR: [
+                    {
+                        check_in: {
+                            lte: new Date(endDate),
+                            gte: new Date(startDate),
+                        },
+                        check_out: {
+                            lte: new Date(endDate),
+                            gte: new Date(startDate),
+                        },
+                    },
+                ],
+            },
+            select: { hotel_name: true, room_booked: true },
+        });
+
+        const isAlreadyBookedOrRented =
+            bookings.some(
+                //@ts-ignore
+                (booking) =>
+                    booking.hotel_name === rentingData.hotel_name &&
+                    booking.room_booked === rentingData.room_booked
+            ) ||
+            rentings.some(
+                //@ts-ignore
+                (renting) =>
+                    renting.hotel_name === rentingData.hotel_name &&
+                    renting.room_booked === rentingData.room_booked
+            );
+
+        if (isAlreadyBookedOrRented) {
+            throw new Error("Room already rented or booked for this time");
+        }
+
         const newRenting = await prisma.renting.create({
             data: rentingData,
         });

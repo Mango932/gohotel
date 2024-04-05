@@ -71,64 +71,60 @@ export default function CreatePayement({ payementCreate }: any) {
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogDescription>
-                        <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl shadow-input  dark:bg-background">
-                            <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
-                                Create Renting
-                            </h2>
+                    <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl shadow-input  dark:bg-background">
+                        <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
+                            Create Renting
+                        </h2>
 
-                            <form className="my-8 mx-2">
-                                <LabelInputContainer className="mb-4">
-                                    <Label htmlFor="custId">Renting Id:</Label>
+                        <form className="my-8 mx-2">
+                            <LabelInputContainer className="mb-4">
+                                <Label htmlFor="custId">Renting Id:</Label>
+                                <Input
+                                    name="rentId"
+                                    placeholder=""
+                                    type="text"
+                                    onChange={handleChange}
+                                />
+                            </LabelInputContainer>
+                            <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4 gap-5 mt-8">
+                                <LabelInputContainer>
+                                    <Label htmlFor="hotel_name">Amount:</Label>
                                     <Input
-                                        name="rentId"
+                                        name="amount"
                                         placeholder=""
-                                        type="text"
+                                        type="number"
                                         onChange={handleChange}
+                                        className=""
                                     />
                                 </LabelInputContainer>
-                                <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4 gap-5 mt-8">
-                                    <LabelInputContainer>
-                                        <Label htmlFor="hotel_name">
-                                            Amount:
-                                        </Label>
-                                        <Input
-                                            name="amount"
-                                            placeholder=""
-                                            type="number"
-                                            onChange={handleChange}
-                                            className=""
-                                        />
-                                    </LabelInputContainer>
-                                    <LabelInputContainer className="w-full">
-                                        <Label htmlFor="room_booked">
-                                            Payement Type:
-                                        </Label>
-                                        <Select
-                                            onValueChange={(e) =>
-                                                setFormData((prev) => ({
-                                                    ...prev,
-                                                    paymentType: e,
-                                                }))
-                                            }
-                                        >
-                                            <SelectTrigger className="w-[180px]">
-                                                <SelectValue placeholder="Credit Card" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="Credit Card">
-                                                    Credit Card
-                                                </SelectItem>
-                                                <SelectItem value="Cash">
-                                                    Cash
-                                                </SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    </LabelInputContainer>
-                                </div>
-                            </form>
-                        </div>
-                    </AlertDialogDescription>
+                                <LabelInputContainer className="w-full">
+                                    <Label htmlFor="room_booked">
+                                        Payement Type:
+                                    </Label>
+                                    <Select
+                                        onValueChange={(e) =>
+                                            setFormData((prev) => ({
+                                                ...prev,
+                                                paymentType: e,
+                                            }))
+                                        }
+                                    >
+                                        <SelectTrigger className="w-[180px]">
+                                            <SelectValue placeholder="Credit Card" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="Credit Card">
+                                                Credit Card
+                                            </SelectItem>
+                                            <SelectItem value="Cash">
+                                                Cash
+                                            </SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </LabelInputContainer>
+                            </div>
+                        </form>
+                    </div>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>

@@ -28,13 +28,11 @@ const getStringDate = (date: any): string => {
     const stringDate =
         date.getFullYear() +
         "-" +
-        ((date.getMonth() || 0 + 1) < 10
+        (date.getMonth() + 1 < 10
             ? "0" + (date.getMonth() || "" + 1)
             : date.getMonth() || "" + 1) +
         "-" +
-        (date.getDate() || 0 < 10
-            ? "0" + (date.getDate() || "")
-            : date.getDate());
+        (date.getDate() < 10 ? "0" + (date.getDate() || "") : date.getDate());
     return stringDate;
 };
 
@@ -89,7 +87,7 @@ export default function SearchBar() {
                         <Label htmlFor="date">Date</Label>
                         <div className="mt-2">
                             <Datepicker
-                                date={search.date}
+                                date={undefined}
                                 onDateChange={onDateChange}
                             ></Datepicker>
                         </div>

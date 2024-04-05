@@ -1,14 +1,14 @@
 import { useState } from "react";
 
-const StarRating = ({ value }: any) => {
+export default function StarRating({ value }: any) {
     return (
         <div>
-            {[1, 2, 3, 4, 5].map((index) => (
+            {[1, 2, 3, 4, 5].map((id, index) => (
                 <Star key={index} filled={index <= value} />
             ))}
         </div>
     );
-};
+}
 
 const Star = ({ filled, onClick }: any) => {
     return (
@@ -17,5 +17,3 @@ const Star = ({ filled, onClick }: any) => {
         </span>
     );
 };
-
-export default StarRating;

@@ -2,9 +2,11 @@
 import Navbar from "@/components/Navbar";
 import SignupForm from "@/app/signup/SignupForm";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function signin() {
     const router = useRouter();
+    const { toast } = useToast();
     //function that handles submitting data to the database
     const formSubmit = async (data: any) => {
         const response = await fetch("/api/user", {
@@ -24,7 +26,11 @@ export default function signin() {
         if (response.ok) {
             router.push("/login");
         } else {
-            console.error("Registration failed");
+            toast({
+                title: "Error",
+                description: "Registration failed",
+                variant: "destructive",
+            });
         }
     };
 

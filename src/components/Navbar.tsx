@@ -81,7 +81,6 @@ export default function Navbar() {
 
                                 <DropdownMenuItem
                                     onClick={() => {
-                                        router.replace("/");
                                         signOut();
                                     }}
                                 >

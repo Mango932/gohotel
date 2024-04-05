@@ -24,18 +24,16 @@ const fetchBookings = async (url: string) => {
 };
 
 export default function account() {
-    const { data: session } = useSession();
-    const [name, setName] = useState();
-    //@ts-ignore
-    const id = session?.user?.id;
-
-    const { data, isLoading } = useSWR(`/api/account?id=${id}`, fetchBookings);
     const { toast } = useToast();
     const router = useRouter();
+    const { data: session } = useSession();
+    //@ts-ignore
+    const id = session?.user?.id;
 
     if (!session?.user) {
         router.replace("/");
     }
+    const { data, isLoading } = useSWR(`/api/account?id=${id}`, fetchBookings);
 
     const onDelete = async (booking: any) => {
         const response = await fetch("/api/account", {

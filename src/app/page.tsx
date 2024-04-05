@@ -5,6 +5,9 @@ import Navbar from "@/components/Navbar";
 import SearchBar from "@/components/SearchBar";
 import SearchResults from "@/components/SearchResults";
 import useSWR from "swr";
+import { useRouter } from "next/navigation";
+
+import { useSession } from "next-auth/react";
 
 const fetchRooms = async (url: string) => {
     try {
@@ -22,6 +25,14 @@ const fetchRooms = async (url: string) => {
 
 export default function SearchPage() {
     const search = useSearchParams();
+    const { data: session } = useSession();
+    const router = useRouter();
+    //@ts-ignore
+    const type = session?.user?.type;
+
+    if (type == "employee") {
+        router.replace("/dashboard");
+    }
 
     const searchQuery = `location=${encodeURIComponent(
         search.get("location") || ""

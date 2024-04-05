@@ -61,7 +61,7 @@ export const columns = ({
             const data = row.original;
             return (
                 //@ts-ignore
-                <div className="text-right font-medium">{data.room.price}</div>
+                <div className="text-right font-medium">{data.room.price}$</div>
             );
         },
     },

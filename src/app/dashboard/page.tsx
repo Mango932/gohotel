@@ -45,17 +45,17 @@ export default function dashboard() {
     const { data: session } = useSession();
     //@ts-ignore
     const id = session?.user?.id;
-
-    const { data, isLoading } = useSWR(
-        `/api/dashboard?id=${id}`,
-        fetchBookings
-    );
     const { toast } = useToast();
     const router = useRouter();
 
     if (!session?.user) {
         router.replace("/");
     }
+
+    const { data, isLoading } = useSWR(
+        `/api/dashboard?id=${id}`,
+        fetchBookings
+    );
 
     const bookToRent = async (booking: any) => {
         const response = await fetch("/api/createRentingFromBooking", {
