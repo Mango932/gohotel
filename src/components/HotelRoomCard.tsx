@@ -17,10 +17,12 @@ import {
 import StarRating from "./StarRating";
 import { useSession } from "next-auth/react";
 import { useToast } from "./ui/use-toast";
+import { useRouter } from "next/navigation";
 
 export default function HotelRoomCard({ info, start, end, index }: any) {
     const { data: session } = useSession();
     const { toast } = useToast();
+    const router = useRouter();
 
     const submitBooking = async () => {
         if (session?.user == undefined) {
@@ -57,6 +59,7 @@ export default function HotelRoomCard({ info, start, end, index }: any) {
                     title: "Success",
                     description: "You successfully created a booking",
                 });
+                router.push("/account");
             }
         }
     };

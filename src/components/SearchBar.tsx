@@ -50,8 +50,8 @@ export default function SearchBar() {
         traveler: 1,
         location: "",
         date: {
-            from: addDays(new Date(), 3),
-            to: addDays(new Date(), 6),
+            from: undefined,
+            to: undefined,
         },
         hotelChain: "",
         roomAmount: 2000,
@@ -105,7 +105,7 @@ export default function SearchBar() {
                         <Label htmlFor="date">Date</Label>
                         <div className="mt-2">
                             <Datepicker
-                                date={undefined}
+                                date={search.date}
                                 onDateChange={onDateChange}
                             ></Datepicker>
                         </div>
