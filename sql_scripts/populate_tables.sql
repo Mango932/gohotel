@@ -12,33 +12,33 @@ VALUES (1, 'johndoe@example.com', 'password1', '2023-01-15'),
        (2, 'janedoe@example.com', 'password2', '2023-02-20');
 
 -- Example data for the Hotel_Chain table
-INSERT INTO Hotel_Chain (Name, Hotel_Amount)
-VALUES ('Holiday In', 1),
-        ('TravelFree', 2),
-       ('GreatVacation', 3);
+INSERT INTO Hotel_Chain (Name, Hotel_Amount, Chain_ID)
+VALUES ('Holiday In', 1, 2),
+        ('TravelFree', 2, 4),
+       ('GreatVacation', 3, 3);
 
 -- Example data for the Hotel table
 INSERT INTO Hotel (Hotel_Name, Number_of_Rooms, Email, Address, Stars, Phone_Number, HotelChain_ID, location)
 VALUES 
-    ('Sakura Inn', 40, 'sakura@example.com', '1 Cherry Blossom Ln', 3, '123-456-7890', 1, 'Japan'),
-    ('Maple Leaf Hotel', 30, 'mapleleaf@example.com', '10 Maple St', 4, '987-654-3210', 1, 'Canada'),
+    ('Sakura Inn', 40, 'sakura@example.com', '1 Cherry Blossom Ln', 3, '123-456-7890', 2, 'Japan'),
+    ('Maple Leaf Hotel', 30, 'mapleleaf@example.com', '10 Maple St', 4, '987-654-3210', 3, 'Canada'),
     ('Golden Gate Lodge', 50, 'goldengate@example.com', '100 Golden Gate Blvd', 5, '456-789-0123', 2, 'United States'),
-    ('Tokyo Tower Suites', 25, 'tokyotower@example.com', '2 Tokyo Tower Ave', 4, '111-222-3333', 1, 'Japan'),
+    ('Tokyo Tower Suites', 25, 'tokyotower@example.com', '2 Tokyo Tower Ave', 4, '111-222-3333', 4, 'Japan'),
     ('Snowy Peaks Resort', 35, 'snowypeaks@example.com', '20 Mountain Rd', 4, '444-555-6666', 2, 'Canada'),
     ('Liberty Hotel', 60, 'liberty@example.com', '30 Liberty St', 5, '777-888-9999', 2, 'United States'),
-    ('Cherry Blossom Plaza', 45, 'cherryblossom@example.com', '3 Cherry Blossom Rd', 3, '666-777-8888', 1, 'Japan'),
+    ('Cherry Blossom Plaza', 45, 'cherryblossom@example.com', '3 Cherry Blossom Rd', 3, '666-777-8888', 3, 'Japan'),
     ('Rocky Mountain Lodge', 55, 'rockymountain@example.com', '40 Rocky Mountain Dr', 4, '222-333-4444', 3, 'Canada'),
     ('Empire Grand Hotel', 65, 'empiregrand@example.com', '50 Empire Blvd', 5, '999-000-1111', 3, 'United States'),
-    ('Mount Fuji Inn', 20, 'mountfuji@example.com', '4 Mount Fuji Ave', 3, '888-999-0000', 1, 'Japan'),
+    ('Mount Fuji Inn', 20, 'mountfuji@example.com', '4 Mount Fuji Ave', 3, '888-999-0000', 2, 'Japan'),
     ('Niagara Falls Hotel', 70, 'niagarafalls@example.com', '60 Falls Blvd', 4, '333-444-5555', 2, 'Canada'),
     ('Statue of Liberty Suites', 75, 'statueofliberty@example.com', '70 Liberty Ave', 5, '000-111-2222', 3, 'United States'),
-    ('Hakone Hot Springs Resort', 80, 'hakonehotsprings@example.com', '5 Hot Springs Rd', 4, '111-222-3333', 1, 'Japan'),
+    ('Hakone Hot Springs Resort', 80, 'hakonehotsprings@example.com', '5 Hot Springs Rd', 4, '111-222-3333', 4, 'Japan'),
     ('Banff Mountain Lodge', 40, 'banffmountain@example.com', '80 Mountain View Dr', 4, '444-555-6666', 2, 'Canada'),
     ('Hollywood Glamour Hotel', 85, 'hollywoodglamour@example.com', '90 Sunset Blvd', 5, '777-888-9999', 3, 'United States'),
-    ('Kyoto Castle Inn', 50, 'kyotocastle@example.com', '6 Castle Rd', 3, '666-777-8888', 1, 'Japan'),
+    ('Kyoto Castle Inn', 50, 'kyotocastle@example.com', '6 Castle Rd', 3, '666-777-8888', 3, 'Japan'),
     ('Whistler Ski Resort', 55, 'whistler@example.com', '100 Ski Hill Rd', 4, '222-333-4444', 2, 'Canada'),
     ('Times Square Towers', 90, 'timessquare@example.com', '10 Broadway', 5, '999-000-1111', 3, 'United States'),
-    ('Osaka Gardens Hotel', 60, 'osakagardens@example.com', '7 Garden Ave', 3, '888-999-0000', 1, 'Japan'),
+    ('Osaka Gardens Hotel', 60, 'osakagardens@example.com', '7 Garden Ave', 3, '888-999-0000', 2, 'Japan'),
     ('Montreal Artisan Hotel', 65, 'montrealartisan@example.com', '110 Art St', 4, '333-444-5555', 2, 'Canada');
 
 -- Example data for the Room table
@@ -122,13 +122,14 @@ VALUES (123456789, 'employee1@hotalA.com', 'Epassword1', 'Manager', 'Sakura Inn'
 
 -- Example data for the Office table
 INSERT INTO Office (Chain_ID, Address, Email, Phone_Number)
-VALUES (1, '123 Central St', 'office@example.com', '123-456-7890'),
-       (2, '456 North St', 'office@anotherchain.com', '987-654-3210');
+VALUES (3, '123 Central St', 'office@example.com', '123-456-7890'),
+    (2, '456 North St', 'office@anotherchain.com', '987-654-3210'),
+    (4, '41 left St', 'office@chain.com', '987-342-5235');
 
 -- Example data for the Booking table
 INSERT INTO Booking (Date, Check_In, Check_Out, Customer_Booked, Room_Booked, Hotel_Name, status_id)
-VALUES ('2023-03-01', '2023-03-10', '2023-03-15', 1, 101, 'Hotel A', 2),
-       ('2023-03-02', '2023-03-12', '2023-03-18', 2, 202, 'Hotel B', 2);
+VALUES ('2023-03-01', '2023-03-10', '2023-03-15', 1, 101, 'Rocky Mountain Lodge', 2),
+       ('2023-03-02', '2023-03-12', '2023-03-18', 2, 201, 'Rocky Mountain Lodge', 2);
 
 -- Example data for the Renting table
 INSERT INTO Renting (Date, Check_In, Check_Out, Customer_ID, Employee_SIN, Room_Booked, Hotel_Name, status_id)
