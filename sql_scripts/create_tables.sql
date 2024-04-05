@@ -155,7 +155,7 @@ CREATE TABLE Renting (
         REFERENCES Employee(SIN)
         ON DELETE RESTRICT
         ON UPDATE CASCADE,
-    CONSTRAINT renting_room_booked_hotel_name_fkey
+    CONSTRAINT renting_room_booked_hotel_name_fkeyll
         FOREIGN KEY (Room_Booked, Hotel_Name) 
         REFERENCES Room(Room_Number, Hotel_Name)
         ON DELETE RESTRICT
