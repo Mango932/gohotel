@@ -36,6 +36,7 @@ CREATE TABLE Hotel (
     Stars INT CHECK (Stars BETWEEN 1 AND 5),
     Phone_Number VARCHAR(20),
     HotelChain_ID INT NOT NULL,
+    location VARCHAR(100),
     CONSTRAINT hotel_hotelchain_id_fkey
         FOREIGN KEY (HotelChain_ID) 
         REFERENCES Hotel_Chain(Chain_ID)
